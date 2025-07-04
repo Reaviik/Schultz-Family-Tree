@@ -145,7 +145,7 @@ function createCoupleNode(node, generation, idPrefix) {
     ).join('');
     exSpousesChildrenHTML = node.exSpouses.map((ex, exIdx) => {
       if (ex.children && ex.children.length > 0) {
-        return `<div class="flex flex-col items-center w-fit" id="${idPrefix}-exspouse${exIdx}-children-container">
+        return `<div class="flex flex-col items-center" id="${idPrefix}-exspouse${exIdx}-children-container">
 ${ex.children.map((child, cidx) =>
           createFamilyNode(child, generation + 1, `${idPrefix}-exspouse${exIdx}-child${cidx}`)
         ).join('')}
@@ -174,10 +174,10 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
   let childrenHTML = '';
   if (node.children && node.children.length > 0) {
     childrenHTML = `
-      <div class="w-full flex justify-center" style="margin-top:60px;">
-        <div class="inline-flex flex-row gap-8 justify-center items-start">
+      <div class="w-full flex justify-center" style="margin-top:20px;">
+                  <div class="inline-flex flex-row gap-4 md:gap-8 justify-center items-start">
           ${node.children.map((child, idx) =>
-            `<div class="flex flex-col items-center w-fit" id="${idPrefix}-child${idx}-family-container">
+            `<div class="flex flex-col items-center" id="${idPrefix}-child${idx}-family-container">
               ${createFamilyNode(child, generation + 1, `${idPrefix}-child${idx}`)}
             </div>`
           ).join('')}

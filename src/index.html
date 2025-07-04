@@ -7,16 +7,47 @@
     <title>Árvore Genealógica com Tailwind</title>
     <link rel="stylesheet" href="output.css">
     <script src="https://cdn.jsdelivr.net/npm/leader-line"></script>
+    <style>
+        /* Estilo personalizado para o scroll horizontal da página */
+        html {
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+        body {
+            min-width: max-content;
+        }
+        /* Estilo do scroll horizontal */
+        ::-webkit-scrollbar {
+            height: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        /* Para Firefox */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.1);
+        }
+    </style>
+
 </head>
 
-<body class="bg-gradient-to-b from-blue-500 to-pink-500 min-h-screen p-8">
+<body class="bg-gradient-to-b from-blue-500 to-pink-500 py-4 md:py-8">
     <div class="w-full fixed top-0 left-0 z-50 bg-blue-600 shadow-md backdrop-blur-sm">
-        <h1 class="text-3xl font-bold text-center text-white py-4">Árvore Genealógica Schultz</h1>
+        <h1 class="text-2xl md:text-3xl font-bold text-center text-white py-3 md:py-4 px-4">Árvore Genealógica Schultz</h1>
     </div>
-    <div class="pt-24 w-full h-[90vh] flex justify-center items-start">
-        <div id="tree-pan-wrapper" class="w-full h-full overflow-auto cursor-grab relative">
-            <div id="tree-canvas" style="width: 3000px; height: 3000px; position: relative;">
-                <div id="family-tree" class="tree" style="transform-origin: center center;">
+    <div class="pt-20 md:pt-24 w-full flex justify-center items-start">
+        <div id="tree-pan-wrapper" class="w-full">
+            <div id="tree-canvas" class="relative">
+                <div id="family-tree" class="tree flex justify-center">
                     <!-- Estrutura da árvore será gerada pelo JavaScript -->
                 </div>
             </div>
@@ -24,6 +55,7 @@
     </div>
     <script src="scripts/family-data.js"></script>
     <script src="scripts/tree-generator.js"></script>
+      
       
 </body>
 
