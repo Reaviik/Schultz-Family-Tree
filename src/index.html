@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árvore Genealógica com Tailwind</title>
+    <link rel="stylesheet" href="output.css">
+    <script src="https://cdn.jsdelivr.net/npm/leader-line"></script>
+</head>
+
+<body class="bg-gradient-to-b from-blue-500 to-pink-500 min-h-screen p-8">
+    <div class="w-full fixed top-0 left-0 z-50 bg-blue-600 shadow-md backdrop-blur-sm">
+        <h1 class="text-3xl font-bold text-center text-white py-4">Árvore Genealógica Schultz</h1>
+    </div>
+    <div class="pt-24 w-full h-[90vh] flex justify-center items-start">
+        <div id="tree-pan-wrapper" class="w-full h-full overflow-auto cursor-grab relative">
+            <div id="tree-canvas" style="width: 3000px; height: 3000px; position: relative;">
+                <div id="family-tree" class="tree" style="transform-origin: center center;">
+                    <!-- Estrutura da árvore será gerada pelo JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../family-data.js"></script>
+    <script src="../tree-generator.js"></script>
+    <script>
+        const panWrapper = document.getElementById('tree-pan-wrapper');
+        const treeCanvas = document.getElementById('tree-canvas');
+        let isPanning = false;
+        let startX = 0, startY = 0;
+        let scrollLeft = 0, scrollTop = 0;
+      
+        // Mouse: Início do arrasto
+        panWrapper.addEventListener('mousedown', (e) => {
+          isPanning = true;
+          panWrapper.classList.add('cursor-grabbing');
+          startX = e.clientX;
+          startY = e.clientY;
+          scrollLeft = panWrapper.scrollLeft;
+          scrollTop = panWrapper.scrollTop;
+        });
+      
+        // Mouse: Fim do arrasto
+        panWrapper.addEventListener('mouseup', () => {
+          isPanning = false;
+          panWrapper.classList.remove('cursor-grabbing');
+        });
+      
+        panWrapper.addEventListener('mouseleave', () => {
+          isPanning = false;
+          panWrapper.classList.remove('cursor-grabbing');
+        });
+      
+        // Mouse: Movimento do arrasto
+        panWrapper.addEventListener('mousemove', (e) => {
+          if (!isPanning) return;
+          e.preventDefault();
+          const walkX = e.clientX - startX;
+          const walkY = e.clientY - startY;
+          panWrapper.scrollLeft = scrollLeft - walkX;
+          panWrapper.scrollTop = scrollTop - walkY;
+        });
+      
+        // Touch: Início
+        panWrapper.addEventListener('touchstart', (e) => {
+          isPanning = true;
+          const touch = e.touches[0];
+          startX = touch.clientX;
+          startY = touch.clientY;
+          scrollLeft = panWrapper.scrollLeft;
+          scrollTop = panWrapper.scrollTop;
+        });
+      
+        // Touch: Movimento
+        panWrapper.addEventListener('touchmove', (e) => {
+          if (!isPanning) return;
+          const touch = e.touches[0];
+          const walkX = touch.clientX - startX;
+          const walkY = touch.clientY - startY;
+          panWrapper.scrollLeft = scrollLeft - walkX;
+          panWrapper.scrollTop = scrollTop - walkY;
+        });
+      
+        // Touch: Fim
+        panWrapper.addEventListener('touchend', () => {
+          isPanning = false;
+        });
+      
+        // Atualiza os conectores ao fazer scroll
+        panWrapper.addEventListener('scroll', () => {
+          if (window.connectors && Array.isArray(window.connectors)) {
+            window.connectors.forEach(line => line.position());
+          } else if (typeof connectors !== 'undefined' && Array.isArray(connectors)) {
+            connectors.forEach(line => line.position());
+          }
+        });
+      
+        // Centraliza a árvore ao carregar
+        window.addEventListener('DOMContentLoaded', () => {
+          panWrapper.scrollLeft = (treeCanvas.offsetWidth - panWrapper.offsetWidth) / 2;
+          panWrapper.scrollTop = (treeCanvas.offsetHeight - panWrapper.offsetHeight) / 2;
+        });
+      </script>
+      
+      
+</body>
+
+</html>
