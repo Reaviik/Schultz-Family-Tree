@@ -78,13 +78,13 @@ const persons = {
   },
   "Augusto Schultz": {
     born: "01/01/1950",
-    photo: "../source/imagens/Augusto Schultz.jpg",
+    photo: "imagens/Augusto Schultz.jpg",
     spouse: "Marli Bühring",
     children: ["David Herbert Schultz"]
   },
   "Marli Bühring": {
     born: "01/01/1955",
-    photo: "../source/imagens/Marli Bühring.jpg",
+    photo: "imagens/Marli Bühring.jpg",
     children: ["David Herbert Schultz"]
   },
   "David Herbert Schultz": {
@@ -96,7 +96,7 @@ const persons = {
     hobbies: ["Jogos Eletronicos", "Programação"],
     education: "3º Completo",
     homes: ["Flor da Serra - Capanema - PR/BR: https://maps.app.goo.gl/TMUALutbMyujvwpu7", "Cozinhador Natingui - Ortigueira - PR/BR: https://maps.app.goo.gl/Wb9wJG9kDA6vcDLK9"],
-    photo: "../source/imagens/David Herbert Schultz.jpg",
+    photo: "imagens/David Herbert Schultz.jpg",
     fathers:[
       "Marli Bühring",
       "Augusto Schultz"
