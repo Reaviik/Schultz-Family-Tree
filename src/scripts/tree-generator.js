@@ -155,13 +155,13 @@ ${ex.children.map((child, cidx) =>
     }).join('');
   }
   if (spouse) {
-    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-4 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-2" id="${idPrefix}-container">
+    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-6 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-2" id="${idPrefix}-container">
       ${createPersonCard(person.name, mainBg, mainId)}
       ${createPersonCard(spouse.name, spouseBg, spouseId)}
       ${exSpousesHTML}
     </div>`;
   } else {
-    coupleHTML = `<div class="flex flex-row gap-4 justify-center items-stretch shadow-lg bg-white bg-opacity-0 p-2" id="${idPrefix}-container">
+    coupleHTML = `<div class="flex flex-row gap-6 justify-center items-stretch shadow-lg bg-white bg-opacity-0 p-2" id="${idPrefix}-container">
       ${createPersonCard(person.name, mainBg, mainId)}
       ${exSpousesHTML}
     </div>`;
@@ -174,8 +174,8 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
   let childrenHTML = '';
   if (node.children && node.children.length > 0) {
     childrenHTML = `
-      <div class="w-full flex justify-center" style="margin-top:20px;">
-                  <div class="inline-flex flex-row gap-4 md:gap-8 justify-center items-start">
+      <div class="w-full flex justify-center" style="margin-top:40px;">
+                  <div class="inline-flex flex-row gap-6 md:gap-12 justify-center items-start">
           ${node.children.map((child, idx) =>
             `<div class="flex flex-col items-center" id="${idPrefix}-child${idx}-family-container">
               ${createFamilyNode(child, generation + 1, `${idPrefix}-child${idx}`)}
