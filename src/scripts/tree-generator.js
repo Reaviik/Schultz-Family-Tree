@@ -20,6 +20,10 @@ const spouseColors = [
 
 let connectors = [];
 
+// Variáveis para controlar a estrutura da árvore
+let currentTreeStructure = 'schultz'; // 'schultz', 'koch', 'buhring'
+let currentTree = treeSchultz; // Referência para a árvore atual
+
 // =====================
 // Utilitários
 // =====================
@@ -195,9 +199,9 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
 function renderTreeWithConnectors() {
   connectors.forEach(line => line.remove());
   connectors = [];
-  document.getElementById('family-tree').innerHTML = createFamilyNode(tree, 0, 'root');
+  document.getElementById('family-tree').innerHTML = createFamilyNode(currentTree, 0, 'root');
   setTimeout(() => {
-    connectAllContainers('root', tree);
+    connectAllContainers('root', currentTree);
   }, 100);
 }
 
@@ -569,4 +573,63 @@ document.addEventListener('fullscreenchange', function() {
 // Inicialização
 // =====================
 
+// Função para alternar entre estruturas de árvore
+function switchTreeStructure(structure) {
+  currentTreeStructure = structure;
+  
+  switch(structure) {
+    case 'schultz':
+      currentTree = treeSchultz;
+      break;
+    case 'koch':
+      currentTree = treeKoch;
+      break;
+    case 'buhring':
+      currentTree = treeBuhring;
+      break;
+    default:
+      currentTree = treeSchultz;
+  }
+  
+  renderTreeWithConnectors();
+  updateTreeControls();
+}
+
+// Função para atualizar os controles da árvore
+function updateTreeControls() {
+  const controlsContainer = document.getElementById('tree-controls');
+  if (!controlsContainer) return;
+  
+  controlsContainer.innerHTML = `
+    <div class="flex flex-wrap gap-2 justify-center mb-4">
+      <button onclick="switchTreeStructure('schultz')" class="px-4 py-2 rounded-lg transition-colors ${currentTreeStructure === 'schultz' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
+        Árvore Schultz
+      </button>
+      <button onclick="switchTreeStructure('koch')" class="px-4 py-2 rounded-lg transition-colors ${currentTreeStructure === 'koch' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
+        Árvore Köch
+      </button>
+      <button onclick="switchTreeStructure('buhring')" class="px-4 py-2 rounded-lg transition-colors ${currentTreeStructure === 'buhring' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
+        Árvore Bühring
+      </button>
+    </div>
+  `;
+}
+
+// Função para criar controles de árvore
+function createTreeControls() {
+  const treeContainer = document.getElementById('family-tree');
+  if (!treeContainer) return;
+  
+  // Cria container para controles
+  const controlsContainer = document.createElement('div');
+  controlsContainer.id = 'tree-controls';
+  controlsContainer.className = 'w-full mb-6 flex justify-center';
+  
+  // Insere antes da árvore
+  treeContainer.parentNode.insertBefore(controlsContainer, treeContainer);
+  
+  updateTreeControls();
+}
+
 renderTreeWithConnectors();
+createTreeControls();

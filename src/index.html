@@ -15,6 +15,7 @@
         }
         body {
             min-width: max-content;
+            overflow-x: auto;
         }
         /* Estilo do scroll horizontal */
         ::-webkit-scrollbar {
@@ -36,8 +37,34 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.1);
         }
+        /* Garantir que a árvore tenha largura mínima */
+        #family-tree {
+            min-width: max-content;
+            width: max-content;
+            padding: 20px;
+        }
+        /* Container da árvore */
+        #tree-pan-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            width: 100%;
+        }
+        #tree-canvas {
+            min-width: max-content;
+            padding: 0 20px;
+        }
+        /* Melhorar visibilidade dos controles */
+        #tree-controls {
+            position: sticky;
+            top: 80px;
+            z-index: 40;
+            background-color: rgba(59, 130, 246, 0.9);
+            backdrop-filter: blur(8px);
+            padding: 8px;
+            border-radius: 8px;
+            margin: 0 16px 16px 16px;
+        }
     </style>
-
 </head>
 
 <body class="bg-gradient-to-b from-blue-500 to-pink-500 py-4 md:py-8">
