@@ -124,7 +124,7 @@ function createPersonCard(name, bgClass, id) {
     dateText = `${death}`;
   }
   return `
-    <div id="${id}" class="w-32 mx-auto bg-white rounded-lg shadow p-2 flex flex-col items-center my-3 mr-3 ml-3 cursor-pointer" onclick="openCardModal('${
+    <div id="${id}" class="w-32 mx-auto bg-white rounded-lg shadow p-2 flex flex-col items-center my-3 cursor-pointer" onclick="openCardModal('${
     person.name
   }', '${bgClass}')">
       <h3 class="text-base font-bold mb-1 text-center whitespace-nowrap truncate overflow-hidden max-w-full">${
@@ -173,7 +173,7 @@ ${ex.children
       .join('');
   }
   if (spouse) {
-    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-2" id="${idPrefix}-container">
+    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-2 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-2" id="${idPrefix}-container">
       ${createPersonCard(person.name, mainBg, mainId)}
       ${createPersonCard(spouse.name, spouseBg, spouseId)}
       ${exSpousesHTML}
