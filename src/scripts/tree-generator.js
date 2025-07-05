@@ -196,12 +196,60 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
 // Renderização e Conexão da Árvore
 // =====================
 
+function centerScrollOnLoad() {
+  const treeWrapper = document.getElementById('tree-pan-wrapper');
+  const treeContainer = document.getElementById('family-tree');
+  
+  if (treeWrapper && treeContainer) {
+    setTimeout(() => {
+      const viewportWidth = window.innerWidth;
+      const treeWidth = treeContainer.scrollWidth;
+      
+      // Calcula a posição para centralizar o scroll
+      const centerPosition = (treeWidth - viewportWidth) / 2;
+      
+      // Aplica o scroll suavemente para centralizar
+      treeWrapper.scrollTo({
+        left: Math.max(0, centerPosition),
+        behavior: 'smooth'
+      });
+    }, 500);
+  }
+}
+
+function centerTreeRelativeToFirstCouple() {
+  const treeContainer = document.getElementById('family-tree');
+  const firstCouple = document.querySelector('#root-container');
+  
+  if (treeContainer && firstCouple) {
+    setTimeout(() => {
+      const viewportWidth = window.innerWidth;
+      const firstCoupleRect = firstCouple.getBoundingClientRect();
+      const treeRect = treeContainer.getBoundingClientRect();
+      
+      // Calcula o centro do primeiro casal
+      const firstCoupleCenter = firstCoupleRect.left + (firstCoupleRect.width / 2);
+      
+      // Calcula o centro da árvore
+      const treeCenter = treeRect.left + (treeRect.width / 2);
+      
+      // Calcula o offset necessário para alinhar a árvore com o primeiro casal
+      const offset = firstCoupleCenter - treeCenter;
+      
+      // Aplica a transformação para centralizar
+      treeContainer.style.transform = `translateX(${offset}px)`;
+    }, 200);
+  }
+}
+
 function renderTreeWithConnectors() {
   connectors.forEach(line => line.remove());
   connectors = [];
   document.getElementById('family-tree').innerHTML = createFamilyNode(currentTree, 0, 'root');
   setTimeout(() => {
     connectAllContainers('root', currentTree);
+    centerTreeRelativeToFirstCouple();
+    centerScrollOnLoad();
   }, 100);
 }
 
@@ -267,6 +315,11 @@ function connectAllContainers(parentId, node) {
 
 window.addEventListener('resize', () => {
   connectors.forEach(line => line.position());
+  // Re-centraliza a árvore em relação ao primeiro casal após redimensionamento
+  setTimeout(() => {
+    centerTreeRelativeToFirstCouple();
+    centerScrollOnLoad();
+  }, 100);
 });
 
 // =====================
@@ -285,6 +338,21 @@ function openCardModal(name, bgClass, showSpouse = false) {
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const year = today.getFullYear();
   const birthDate = `${day}/${month}/${year}`;
+
+  // Função para calcular idade
+  function calculateAge(born, death) {
+    if (!born || !death) return null;
+    
+    const bornDate = new Date(born.split('/').reverse().join('-'));
+    const deathDate = new Date(death.split('/').reverse().join('-'));
+    
+    if (isNaN(bornDate.getTime()) || isNaN(deathDate.getTime())) return null;
+    
+    const ageInMs = deathDate - bornDate;
+    const ageInYears = Math.floor(ageInMs / (1000 * 60 * 60 * 24 * 365.25));
+    
+    return ageInYears;
+  }
 
   // Centraliza a lógica de exibição: se showSpouse, monta displayPerson com dados do spouse + filhos/exSpouses do principal
   let displayPerson = person;
@@ -402,6 +470,10 @@ function openCardModal(name, bgClass, showSpouse = false) {
             <h3 class="text-2xl font-bold mb-1">${displayPerson.name}</h3>
             <p class="text-gray-600 mb-2 italic">${displayPerson.born || ''}${displayPerson.born && displayPerson.death ? ' - ' : ''}${displayPerson.death || ''}</p>
             <ul class="mb-2 text-gray-800 text-sm">
+              ${(() => {
+                const age = calculateAge(displayPerson.born, displayPerson.death);
+                return age ? `<li><span class=\"font-semibold\">Idade:</span> ${age} anos</li>` : '';
+              })()}
               ${paisInfo ? `<li><span class=\"font-semibold\">Pais:</span> ${paisInfo}</li>` : ''}
               ${displayPerson.spouse ? `<li><span class=\"font-semibold\">Cônjuge:</span> ${spouseLink}</li>` : ''}
               ${childrenLinks ? `<li><span class=\"font-semibold\">Filhos:</span> ${childrenLinks}</li>` : ''}
@@ -441,8 +513,38 @@ function openCardModal(name, bgClass, showSpouse = false) {
                 const idx = displayPerson.grave.indexOf(':');
                 if (idx !== -1) {
                   const nome = displayPerson.grave.slice(0, idx).trim();
-                  const url = displayPerson.grave.slice(idx + 1).trim();
-                  return `<a href=\"${url}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
+                  const coordenadas = displayPerson.grave.slice(idx + 1).trim();
+                  // Verifica se são coordenadas (formato: XX°XX'XX.X"S XX°XX'XX.X"W)
+                  if (/^\d+°\d+'\d+\.\d+"[NS]\s+\d+°\d+'\d+\.\d+"[EW]$/.test(coordenadas)) {
+                    // Converte coordenadas para formato decimal
+                    const latMatch = coordenadas.match(/(\d+)°(\d+)'(\d+\.\d+)"([NS])/);
+                    const lonMatch = coordenadas.match(/(\d+)°(\d+)'(\d+\.\d+)"([EW])/);
+                    if (latMatch && lonMatch) {
+                      const latDeg = parseFloat(latMatch[1]);
+                      const latMin = parseFloat(latMatch[2]);
+                      const latSec = parseFloat(latMatch[3]);
+                      const latDir = latMatch[4];
+                      const lonDeg = parseFloat(lonMatch[1]);
+                      const lonMin = parseFloat(lonMatch[2]);
+                      const lonSec = parseFloat(lonMatch[3]);
+                      const lonDir = lonMatch[4];
+                      
+                      let lat = latDeg + latMin/60 + latSec/3600;
+                      let lon = lonDeg + lonMin/60 + lonSec/3600;
+                      
+                      if (latDir === 'S') lat = -lat;
+                      if (lonDir === 'W') lon = -lon;
+                      
+                      const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+                      return `<a href=\"${googleMapsUrl}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
+                    }
+                  }
+                  // Se não são coordenadas, trata como URL normal
+                  if (/^https?:\/\//.test(coordenadas)) {
+                    return `<a href=\"${coordenadas}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
+                  } else {
+                    return `${nome}: ${coordenadas}`;
+                  }
                 } else if (/^https?:\/\//.test(displayPerson.grave)) {
                   return `<a href=\"${displayPerson.grave}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">Ver localização</a>`;
                 } else {
@@ -593,6 +695,12 @@ function switchTreeStructure(structure) {
   
   renderTreeWithConnectors();
   updateTreeControls();
+  
+  // Centraliza a árvore em relação ao primeiro casal após a mudança de estrutura
+  setTimeout(() => {
+    centerTreeRelativeToFirstCouple();
+    centerScrollOnLoad();
+  }, 300);
 }
 
 // Função para atualizar os controles da árvore
@@ -601,33 +709,21 @@ function updateTreeControls() {
   if (!controlsContainer) return;
   
   controlsContainer.innerHTML = `
-    <div class="flex flex-wrap gap-2 justify-center mb-4">
-      <button onclick="switchTreeStructure('schultz')" class="px-4 py-2 rounded-lg transition-colors ${currentTreeStructure === 'schultz' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
-        Árvore Schultz
-      </button>
-      <button onclick="switchTreeStructure('koch')" class="px-4 py-2 rounded-lg transition-colors ${currentTreeStructure === 'koch' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
-        Árvore Köch
-      </button>
-      <button onclick="switchTreeStructure('buhring')" class="px-4 py-2 rounded-lg transition-colors ${currentTreeStructure === 'buhring' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
-        Árvore Bühring
-      </button>
-    </div>
+    <button onclick="switchTreeStructure('schultz')" class="${currentTreeStructure === 'schultz' ? 'active' : ''}">
+      Árvore Schultz
+    </button>
+    <button onclick="switchTreeStructure('koch')" class="${currentTreeStructure === 'koch' ? 'active' : ''}">
+      Árvore Köch
+    </button>
+    <button onclick="switchTreeStructure('buhring')" class="${currentTreeStructure === 'buhring' ? 'active' : ''}">
+      Árvore Bühring
+    </button>
   `;
 }
 
 // Função para criar controles de árvore
 function createTreeControls() {
-  const treeContainer = document.getElementById('family-tree');
-  if (!treeContainer) return;
-  
-  // Cria container para controles
-  const controlsContainer = document.createElement('div');
-  controlsContainer.id = 'tree-controls';
-  controlsContainer.className = 'w-full mb-6 flex justify-center';
-  
-  // Insere antes da árvore
-  treeContainer.parentNode.insertBefore(controlsContainer, treeContainer);
-  
+  // Os controles já estão no HTML, apenas atualiza
   updateTreeControls();
 }
 

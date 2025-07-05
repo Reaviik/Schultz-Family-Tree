@@ -1,29 +1,27 @@
 // Dados detalhados de cada pessoa
 const persons = {
+  // Dead
   "Edmundo Schultz": {
     hometown: "Russia",
-    grave: "Russia: https://maps.app.goo.gl/xiLyjfyg2EmW4i689",
-    religion: "Desconhecido",
+    grave: "Irai - SC/BR: 27°11'22.0\"S 53°15'47.0\"W",
+    religion: "Ex: Luterana - IECLB",
     homes: ["Russia: https://maps.app.goo.gl/xiLyjfyg2EmW4i689"],
     profession: ["Agricultor"],
-    education: "Desconhecido",
-    hobbies: ["Desconhecido"],
+    education: "Ex: 3° Completo",
+    hobbies: ["Ex: Caçar e Pescar"],
     events: ["Casamento com Guilhelmina Schultz em 27/03/1948"],
     documents: [],
-    nicknames: ["Ed"],
-    quotes: ["Tudo oque o frio tóca fica mais bonito. Informação desverdadeira criada apenas para complementar"],
-    description: "Pessoa dedicada à família, gostava de música e jardinagem. Informação desverdadeira criada apenas para complementar",
+    spouse: "Guilhermina Schultz",
+    nicknames: ["Ex: Ed"],
+    quotes: ["Frase de efeito que só voce diria ex: Penso, logo existo"],
+    description: "Um breve resumo sobre você por exemplo",
     children: ["Herbert Schultz", "Eduardo Schultz", "Daniel Schultz"]
   },
-  "Guilhelmina Schultz": {
-    education: "Desconhecido",
-    hobbies: ["Desconhecido"],
-    events: [],
-    documents: [],
-    nicknames: [],
-    quotes: [],
-    description: "",
+  // Dead
+  "Guilhermina Schultz": {
+    spouse: "Edmundo Schultz",
   },
+  // Dead
   "Wilhelmina Schultz":{
     hometown: "Russia",
     born: "04/01/1925",
@@ -38,6 +36,7 @@ const persons = {
     homes: ["Irai - Santa Catarina"],
     singleName: "Wilhelmina Reicheste"
   },
+  // ?
   "Eduardo Schultz":{
     hometown: "Russia",
     born: "02/01/1916",
@@ -45,12 +44,13 @@ const persons = {
     spouse: "Wilhelmina Reicheste",
     fathers:[
       "Edmundo Schultz",
-      "Guilhermina Schultz"
+      "Wilhelmina Schultz"
     ],
     documents:["https://www.familysearch.org/ark:/61903/3:1:3QHV-P3JS-M9SD-S?view=index&personArk=%2Fark%3A%2F61903%2F1%3A1%3AX9YB-1718&action=view&cc=3741255&lang=pt&groupId="],
     events: ["Casamento com Wilhelmina Reicheste em 31/06/1948"],
     homes: ["Irai - Santa Catarina"],
   },
+  // ?
   "Daniel Schultz": {
     hometown: "Russia",
     born: "02/06/1921",
@@ -66,6 +66,7 @@ const persons = {
     ],
     events: ["Casou-se com Lidie Reinhard Köck em 27/07/1942"]
   },
+  // ?
   "Lilie Reinhard Schultz": {
     hometown: "Irai - Santa Catarina",
     born: "24/04/1931",
@@ -79,6 +80,7 @@ const persons = {
       "Lucinda Köck"
     ],
   },
+  // Dead
   "Herbert Schultz": {
     born: "16/03/1919",
     death: "18/01/1989",
@@ -110,6 +112,7 @@ const persons = {
       "Josefina Lidia Schultz",
     ],
   },
+  // Dead
   "Josefina Lidia Schultz": {
     born: "01/01/1955",
     hometown: "Santa Catarina",
@@ -132,12 +135,14 @@ const persons = {
       "Terreza Köck"
     ]
   },
+  // Aproved
   "Augusto Schultz": {
     born: "01/01/1950",
     photo: "imagens/Augusto Schultz.jpg",
     spouse: "Marli Bühring",
     children: ["David Herbert Schultz"]
   },
+  // Aproved
   "Marli Bühring": {
     born: "01/01/1955",
     photo: "imagens/Marli Bühring.jpg",
@@ -149,12 +154,14 @@ const persons = {
       "Plinio Bühring"
     ]
   },
+  // Dead
   "Plinio Bühring": {
     profession: ["Agricultor"],
     children: [
       "Marli Bühring",
     ],
   },
+  // Aproved
   "David Herbert Schultz": {
     born: "07/03/1995",
     hometown: "Flor da Serra - Capanema - PR/BR: https://maps.app.goo.gl/YQ1k8qkpC3sipDEz5",
@@ -170,6 +177,7 @@ const persons = {
       "Augusto Schultz"
     ],
   },
+  // Alive
   "Maria de Lurdes": {
     fathers:[
       "Josefina Lidia Schultz",
@@ -178,15 +186,17 @@ const persons = {
     spouse: "Ivo Correia",
     children: ["Carlos Correia", "Joarez", "Paulo Eder Correia", "Cezar", ]
   },
+  // Dead
   "Ivo Correia": {
-    born: "01/01/1982"
   },
+  // Alive
   "Carlos Correia": {
     fathers:[
       "Maria de Lurdes",
       "Ivo Correia"
     ],
   },
+  // Alive
   "Veranice Schultz": {
     born: "01/01/1958",
     fathers:[
@@ -194,24 +204,28 @@ const persons = {
       "Herbert Schultz"
     ],
   },
+  // Alive
   "Loreni Schultz": {
     fathers:[
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
   },
+  // Alive
   "Ingridi Schultz": {
     fathers:[
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
   },
+  // Alive
   "Marcio Leandro Schultz": {
     fathers:[
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
   },
+  // Dead
   "Erni Herbert Schultz": {
     born: "01/01/1968",
     death: "18/01/1989",
@@ -225,7 +239,7 @@ const persons = {
 // Estrutura da árvore genealógica (referenciando nomes)
 const tree = {
   name: "Edmundo Schultz",
-  spouse: "Vilhermina Schultz",
+  spouse: "Guilhermina Schultz",
   children: [
     {
       name: "Daniel Schultz",
@@ -263,7 +277,7 @@ const tree = {
 // Estrutura da árvore Schultz (mesma que a original)
 const treeSchultz = {
   name: "Edmundo Schultz",
-  spouse: "Vilhermina Schultz",
+  spouse: "Guilhermina Schultz",
   children: [
     {
       name: "Daniel Schultz",

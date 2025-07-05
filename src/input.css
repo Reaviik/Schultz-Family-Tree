@@ -2,6 +2,7 @@
 @tailwind utilities;
 
 /* Agora o CSS clássico da árvore genealógica */
+
 * {
   margin: 0;
   padding: 0;
