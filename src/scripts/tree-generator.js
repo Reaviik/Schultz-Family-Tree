@@ -196,27 +196,6 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
 // Renderização e Conexão da Árvore
 // =====================
 
-function centerScrollOnLoad() {
-  const treeWrapper = document.getElementById('tree-pan-wrapper');
-  const treeContainer = document.getElementById('family-tree');
-  
-  if (treeWrapper && treeContainer) {
-    setTimeout(() => {
-      const viewportWidth = window.innerWidth;
-      const treeWidth = treeContainer.scrollWidth;
-      
-      // Calcula a posição para centralizar o scroll
-      const centerPosition = (treeWidth - viewportWidth) / 2;
-      
-      // Aplica o scroll suavemente para centralizar
-      treeWrapper.scrollTo({
-        left: Math.max(0, centerPosition),
-        behavior: 'smooth'
-      });
-    }, 500);
-  }
-}
-
 function centerTreeRelativeToFirstCouple() {
   const treeContainer = document.getElementById('family-tree');
   const firstCouple = document.querySelector('#root-container');
@@ -249,7 +228,6 @@ function renderTreeWithConnectors() {
   setTimeout(() => {
     connectAllContainers('root', currentTree);
     centerTreeRelativeToFirstCouple();
-    centerScrollOnLoad();
   }, 100);
 }
 
@@ -318,7 +296,6 @@ window.addEventListener('resize', () => {
   // Re-centraliza a árvore em relação ao primeiro casal após redimensionamento
   setTimeout(() => {
     centerTreeRelativeToFirstCouple();
-    centerScrollOnLoad();
   }, 100);
 });
 
@@ -699,7 +676,6 @@ function switchTreeStructure(structure) {
   // Centraliza a árvore em relação ao primeiro casal após a mudança de estrutura
   setTimeout(() => {
     centerTreeRelativeToFirstCouple();
-    centerScrollOnLoad();
   }, 300);
 }
 
