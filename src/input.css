@@ -124,21 +124,44 @@ html {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.1);
 }
+
+/* Melhorar comportamento do scroll e zoom */
+@media (max-width: 768px) {
+  #tree-pan-wrapper {
+    height: calc(100vh - 100px);
+  }
+}
+
+/* Garantir que o conteúdo seja sempre visível */
+body {
+  min-height: 100vh;
+  overflow-x: auto;
+  overflow-y: auto;
+}
 /* Garantir que a árvore tenha largura mínima */
 #family-tree {
   min-width: max-content;
   width: max-content;
   padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 /* Container da árvore */
 #tree-pan-wrapper {
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
   width: 100%;
+  height: calc(100vh - 120px); /* Altura total menos o cabeçalho */
 }
 #tree-canvas {
   min-width: max-content;
+  min-height: 100%;
   padding: 0 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 /* Estilo dos controles de árvore no cabeçalho */
 #tree-controls {

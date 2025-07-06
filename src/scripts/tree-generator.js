@@ -477,16 +477,18 @@ function openCardModal(name, bgClass, showSpouse = false) {
             <button type="button" onclick="expandImageModal(this)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900 transition z-10" style="background:none; border:none; outline:none;" title="Ampliar imagem">
               <svg xmlns='http://www.w3.org/2000/svg' class='w-4 h-4 sm:w-5 sm:h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8V6a2 2 0 012-2h2m8 0h2a2 2 0 012 2v2m0 8v2a2 2 0 01-2 2h-2m-8 0H6a2 2 0 01-2-2v-2'/></svg>
             </button>
-            <img src="${(() => {
-              if (!displayPerson.photo || displayPerson.photo.trim() === '') {
-                return 'https://avatar.iran.liara.run/public/boy?username=Ash';
-              }
-              if (displayPerson.photo.startsWith('http')) {
-                return displayPerson.photo;
-              }
-              return `https://drive.google.com/uc?export=view&id=${displayPerson.photo}`;
-            })()}" alt="Foto de ${displayPerson.name}" class="w-36 h-48 rounded-lg object-cover border-4 border-blue-200 mb-2" style="aspect-ratio:3/4;">
-            ${displayPerson.bio ? `<p class=\"text-gray-700 text-sm text-center mt-2\">${displayPerson.bio}</p>` : ''}
+            <img src="${
+              displayPerson.photo && displayPerson.photo.trim() !== ''
+                ? displayPerson.photo
+                : 'https://avatar.iran.liara.run/public/boy?username=Ash'
+            }" alt="Foto de ${
+    displayPerson.name
+  }" class="w-36 h-48 rounded-lg object-cover border-4 border-blue-200 mb-2" style="aspect-ratio:3/4;">
+            ${
+              displayPerson.bio
+                ? `<p class=\"text-gray-700 text-sm text-center mt-2\">${displayPerson.bio}</p>`
+                : ''
+            }
           </div>
           <div class="flex-1">
             <h3 class="text-2xl font-bold mb-1">${displayPerson.name}</h3>
