@@ -95,3 +95,82 @@
 .tree li a:hover + ul ul::before {
   border-color: #94a0b4;
 }
+/* Estilo personalizado para o scroll horizontal da página */
+html {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+body {
+  min-width: max-content;
+  overflow-x: auto;
+}
+/* Estilo do scroll horizontal */
+::-webkit-scrollbar {
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+/* Para Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.1);
+}
+/* Garantir que a árvore tenha largura mínima */
+#family-tree {
+  min-width: max-content;
+  width: max-content;
+  padding: 20px;
+}
+/* Container da árvore */
+#tree-pan-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+#tree-canvas {
+  min-width: max-content;
+  padding: 0 20px;
+}
+/* Estilo dos controles de árvore no cabeçalho */
+#tree-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: rgba(59, 130, 246, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 0 0 8px 8px;
+  width: 100%;
+  text-align: center;
+}
+#tree-controls button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+#tree-controls button.active {
+  background-color: #ffffff;
+  color: #1e40af;
+}
+#tree-controls button:not(.active) {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+#tree-controls button:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}

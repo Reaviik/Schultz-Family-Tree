@@ -103,7 +103,7 @@ function createPersonLink(name, bgClass, extra = '') {
 }
 
 function createChildrenLinks(childrenNames, bgClass) {
-  return childrenNames.map(childName => createPersonLink(childName, bgClass)).join(', ');
+  return childrenNames.map((childName) => createPersonLink(childName, bgClass)).join(', ');
 }
 
 // =====================
@@ -145,22 +145,26 @@ function createCoupleNode(node, generation, idPrefix) {
   // Spouse
   const spouse = node.spouse ? getPersonData(node.spouse) : null;
   if (node.exSpouses && Array.isArray(node.exSpouses)) {
-    exSpousesHTML = node.exSpouses.map((ex, exIdx) =>
-      createPersonCard(ex, 'bg-gray-100', `${idPrefix}-exspouse${exIdx}`)
-    ).join('');
-    exSpousesChildrenHTML = node.exSpouses.map((ex, exIdx) => {
-      if (ex.children && ex.children.length > 0) {
-        return `<div class="flex flex-col items-center" id="${idPrefix}-exspouse${exIdx}-children-container">
-${ex.children.map((child, cidx) =>
-          createFamilyNode(child, generation + 1, `${idPrefix}-exspouse${exIdx}-child${cidx}`)
-        ).join('')}
+    exSpousesHTML = node.exSpouses
+      .map((ex, exIdx) => createPersonCard(ex, 'bg-gray-100', `${idPrefix}-exspouse${exIdx}`))
+      .join('');
+    exSpousesChildrenHTML = node.exSpouses
+      .map((ex, exIdx) => {
+        if (ex.children && ex.children.length > 0) {
+          return `<div class="flex flex-col items-center" id="${idPrefix}-exspouse${exIdx}-children-container">
+${ex.children
+  .map((child, cidx) =>
+    createFamilyNode(child, generation + 1, `${idPrefix}-exspouse${exIdx}-child${cidx}`),
+  )
+  .join('')}
 </div>`;
-      }
-      return '';
-    }).join('');
+        }
+        return '';
+      })
+      .join('');
   }
   if (spouse) {
-    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-6 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-2" id="${idPrefix}-container">
+    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-2 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-2" id="${idPrefix}-container">
       ${createPersonCard(person.name, mainBg, mainId)}
       ${createPersonCard(spouse.name, spouseBg, spouseId)}
       ${exSpousesHTML}
@@ -181,11 +185,14 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
     childrenHTML = `
       <div class="w-full flex justify-center" style="margin-top:40px;">
                   <div class="inline-flex flex-row gap-6 md:gap-12 justify-center items-start">
-          ${node.children.map((child, idx) =>
-            `<div class="flex flex-col items-center" id="${idPrefix}-child${idx}-family-container">
+          ${node.children
+            .map(
+              (child, idx) =>
+                `<div class="flex flex-col items-center" id="${idPrefix}-child${idx}-family-container">
               ${createFamilyNode(child, generation + 1, `${idPrefix}-child${idx}`)}
-            </div>`
-          ).join('')}
+            </div>`,
+            )
+            .join('')}
         </div>
       </div>
     `;
@@ -200,22 +207,22 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
 function centerTreeRelativeToFirstCouple() {
   const treeContainer = document.getElementById('family-tree');
   const firstCouple = document.querySelector('#root-container');
-  
+
   if (treeContainer && firstCouple) {
     setTimeout(() => {
       const viewportWidth = window.innerWidth;
       const firstCoupleRect = firstCouple.getBoundingClientRect();
       const treeRect = treeContainer.getBoundingClientRect();
-      
+
       // Calcula o centro do primeiro casal
-      const firstCoupleCenter = firstCoupleRect.left + (firstCoupleRect.width / 2);
-      
+      const firstCoupleCenter = firstCoupleRect.left + firstCoupleRect.width / 2;
+
       // Calcula o centro da árvore
-      const treeCenter = treeRect.left + (treeRect.width / 2);
-      
+      const treeCenter = treeRect.left + treeRect.width / 2;
+
       // Calcula o offset necessário para alinhar a árvore com o primeiro casal
       const offset = firstCoupleCenter - treeCenter;
-      
+
       // Aplica a transformação para centralizar
       treeContainer.style.transform = `translateX(${offset}px)`;
     }, 200);
@@ -223,7 +230,7 @@ function centerTreeRelativeToFirstCouple() {
 }
 
 function renderTreeWithConnectors() {
-  connectors.forEach(line => line.remove());
+  connectors.forEach((line) => line.remove());
   connectors = [];
   document.getElementById('family-tree').innerHTML = createFamilyNode(currentTree, 0, 'root');
   setTimeout(() => {
@@ -236,25 +243,23 @@ function connectAllContainers(parentId, node) {
   const parentContainer = document.getElementById(`${parentId}-container`);
   if (parentContainer && node.children) {
     node.children.forEach((child, idx) => {
-      const childFamilyContainer = document.getElementById(`${parentId}-child${idx}-family-container`);
+      const childFamilyContainer = document.getElementById(
+        `${parentId}-child${idx}-family-container`,
+      );
       const childCard = document.getElementById(`${parentId}-child${idx}-main`);
       if (childFamilyContainer && childCard) {
-        const line = new LeaderLine(
-          parentContainer,
-          childCard,
-          {
-            color: '#4fffe2',
-            size: 2,
-            path: 'grid',
-            startPlug: 'behind',
-            endPlug: 'arrow1',
-            gradient: false,
-            dropShadow: true,
-            dash: false,
-            startSocket: 'bottom',
-            endSocket: 'top'
-          }
-        );
+        const line = new LeaderLine(parentContainer, childCard, {
+          color: '#4fffe2',
+          size: 2,
+          path: 'grid',
+          startPlug: 'behind',
+          endPlug: 'arrow1',
+          gradient: false,
+          dropShadow: true,
+          dash: false,
+          startSocket: 'bottom',
+          endSocket: 'top',
+        });
         connectors.push(line);
       }
       connectAllContainers(`${parentId}-child${idx}`, child);
@@ -265,24 +270,22 @@ function connectAllContainers(parentId, node) {
       if (ex.children && ex.children.length > 0) {
         const exSpouseCard = document.getElementById(`${parentId}-exspouse${exIdx}`);
         ex.children.forEach((child, cidx) => {
-          const childCard = document.getElementById(`${parentId}-exspouse${exIdx}-child${cidx}-main`);
+          const childCard = document.getElementById(
+            `${parentId}-exspouse${exIdx}-child${cidx}-main`,
+          );
           if (exSpouseCard && childCard) {
-            const line = new LeaderLine(
-              exSpouseCard,
-              childCard,
-              {
-                color: '#ff7e7e',
-                size: 2,
-                path: 'grid',
-                startPlug: 'behind',
-                endPlug: 'arrow1',
-                gradient: false,
-                dropShadow: true,
-                dash: false,
-                startSocket: 'bottom',
-                endSocket: 'top'
-              }
-            );
+            const line = new LeaderLine(exSpouseCard, childCard, {
+              color: '#ff7e7e',
+              size: 2,
+              path: 'grid',
+              startPlug: 'behind',
+              endPlug: 'arrow1',
+              gradient: false,
+              dropShadow: true,
+              dash: false,
+              startSocket: 'bottom',
+              endSocket: 'top',
+            });
             connectors.push(line);
           }
           connectAllContainers(`${parentId}-exspouse${exIdx}-child${cidx}`, child);
@@ -293,7 +296,7 @@ function connectAllContainers(parentId, node) {
 }
 
 window.addEventListener('resize', () => {
-  connectors.forEach(line => line.position());
+  connectors.forEach((line) => line.position());
   // Re-centraliza a árvore em relação ao primeiro casal após redimensionamento
   setTimeout(() => {
     centerTreeRelativeToFirstCouple();
@@ -320,15 +323,15 @@ function openCardModal(name, bgClass, showSpouse = false) {
   // Função para calcular idade
   function calculateAge(born, death) {
     if (!born || !death) return null;
-    
+
     const bornDate = new Date(born.split('/').reverse().join('-'));
     const deathDate = new Date(death.split('/').reverse().join('-'));
-    
+
     if (isNaN(bornDate.getTime()) || isNaN(deathDate.getTime())) return null;
-    
+
     const ageInMs = deathDate - bornDate;
     const ageInYears = Math.floor(ageInMs / (1000 * 60 * 60 * 24 * 365.25));
-    
+
     return ageInYears;
   }
 
@@ -342,7 +345,7 @@ function openCardModal(name, bgClass, showSpouse = false) {
       hometown: person.spouse.hometown || person.hometown,
       grave: person.spouse.grave || person.grave,
       death: person.spouse.death || undefined,
-      photo: person.spouse.photo || undefined
+      photo: person.spouse.photo || undefined,
     };
   }
 
@@ -355,7 +358,7 @@ function openCardModal(name, bgClass, showSpouse = false) {
         children: mainPerson.children,
         exSpouses: mainPerson.exSpouses,
         hometown: displayPerson.hometown || mainPerson.hometown,
-        grave: displayPerson.grave || mainPerson.grave
+        grave: displayPerson.grave || mainPerson.grave,
       };
     }
   }
@@ -376,29 +379,44 @@ function openCardModal(name, bgClass, showSpouse = false) {
   // Monta childrenLinks e exSpousesLinks de forma centralizada
   let childrenLinks = '';
   if (displayPerson.children) {
-    childrenLinks = displayPerson.children.map(childName => {
-      const child = getPersonData(childName);
-      return `<a href="#" class="text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5" onclick="openCardModal('${child.name}', '${bgClass}'); return false;">${child.name}</a>`;
-    }).join(', ');
+    childrenLinks = displayPerson.children
+      .map((childName) => {
+        const child = getPersonData(childName);
+        return `<a href="#" class="text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5" onclick="openCardModal('${child.name}', '${bgClass}'); return false;">${child.name}</a>`;
+      })
+      .join(', ');
   }
   let exSpousesLinks = '';
-  if (displayPerson.exSpouses && Array.isArray(displayPerson.exSpouses) && displayPerson.exSpouses.length > 0) {
-    exSpousesLinks = displayPerson.exSpouses.map(exName => {
-      const ex = getPersonData(exName);
-      return `<a href="#" class="text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5" onclick="openCardModal('${ex.name}', '${bgClass}'); return false;">${ex.name}</a>`;
-    }).join(', ');
+  if (
+    displayPerson.exSpouses &&
+    Array.isArray(displayPerson.exSpouses) &&
+    displayPerson.exSpouses.length > 0
+  ) {
+    exSpousesLinks = displayPerson.exSpouses
+      .map((exName) => {
+        const ex = getPersonData(exName);
+        return `<a href="#" class="text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5" onclick="openCardModal('${ex.name}', '${bgClass}'); return false;">${ex.name}</a>`;
+      })
+      .join(', ');
   }
 
   // Buscar pais compatível
   let paisInfo = '';
-  if (displayPerson.fathers && Array.isArray(displayPerson.fathers) && displayPerson.fathers.length > 0) {
-    paisInfo = displayPerson.fathers.map((parentName, idx) => {
-      const parent = getPersonData(parentName);
-      return `<a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${parent.name}', '${bgClass}'); return false;\">${parent.name}</a>`;
-    }).join(' e ');
+  if (
+    displayPerson.fathers &&
+    Array.isArray(displayPerson.fathers) &&
+    displayPerson.fathers.length > 0
+  ) {
+    paisInfo = displayPerson.fathers
+      .map((parentName, idx) => {
+        const parent = getPersonData(parentName);
+        return `<a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${parent.name}', '${bgClass}'); return false;\">${parent.name}</a>`;
+      })
+      .join(' e ');
   } else {
     // Busca tradicional na árvore
-    let pai = null, mae = null;
+    let pai = null,
+      mae = null;
     const paisArr = findParentsCompat(tree, displayPerson.name);
     if (paisArr && paisArr.length > 0) {
       pai = paisArr[0];
@@ -410,11 +428,29 @@ function openCardModal(name, bgClass, showSpouse = false) {
     const paiIsSpouse = paiPrincipal && findMainPersonBySpouseName(tree, paiPrincipal.name);
     const maeIsSpouse = maePrincipal && findMainPersonBySpouseName(tree, maePrincipal.name);
     if (paiPrincipal && maePrincipal && paiPrincipal.name !== maePrincipal.name) {
-      paisInfo = `<a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${JSON.stringify(paiIsSpouse ? findMainPersonBySpouseName(tree, paiPrincipal.name) : paiPrincipal).replace(/\\\"/g, '&quot;')}', '${bgClass}'${paiIsSpouse ? ', true' : ''}); return false;\">${paiPrincipal.name}</a> e <a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${JSON.stringify(maeIsSpouse ? findMainPersonBySpouseName(tree, maePrincipal.name) : maePrincipal).replace(/\\\"/g, '&quot;')}', '${bgClass}'${maeIsSpouse ? ', true' : ''}); return false;\">${maePrincipal.name}</a>`;
+      paisInfo = `<a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${JSON.stringify(
+        paiIsSpouse ? findMainPersonBySpouseName(tree, paiPrincipal.name) : paiPrincipal,
+      ).replace(/\\\"/g, '&quot;')}', '${bgClass}'${
+        paiIsSpouse ? ', true' : ''
+      }); return false;\">${
+        paiPrincipal.name
+      }</a> e <a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${JSON.stringify(
+        maeIsSpouse ? findMainPersonBySpouseName(tree, maePrincipal.name) : maePrincipal,
+      ).replace(/\\\"/g, '&quot;')}', '${bgClass}'${
+        maeIsSpouse ? ', true' : ''
+      }); return false;\">${maePrincipal.name}</a>`;
     } else if (paiPrincipal) {
-      paisInfo = `<a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${JSON.stringify(paiIsSpouse ? findMainPersonBySpouseName(tree, paiPrincipal.name) : paiPrincipal).replace(/\\\"/g, '&quot;')}', '${bgClass}'${paiIsSpouse ? ', true' : ''}); return false;\">${paiPrincipal.name}</a>`;
+      paisInfo = `<a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${JSON.stringify(
+        paiIsSpouse ? findMainPersonBySpouseName(tree, paiPrincipal.name) : paiPrincipal,
+      ).replace(/\\\"/g, '&quot;')}', '${bgClass}'${
+        paiIsSpouse ? ', true' : ''
+      }); return false;\">${paiPrincipal.name}</a>`;
     } else if (maePrincipal) {
-      paisInfo = `<a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${JSON.stringify(maeIsSpouse ? findMainPersonBySpouseName(tree, maePrincipal.name) : maePrincipal).replace(/\\\"/g, '&quot;')}', '${bgClass}'${maeIsSpouse ? ', true' : ''}); return false;\">${maePrincipal.name}</a>`;
+      paisInfo = `<a href=\"#\" class=\"text-blue-600 hover:text-blue-800 transition-colors font-semibold px-1 py-0.5\" onclick=\"openCardModal('${JSON.stringify(
+        maeIsSpouse ? findMainPersonBySpouseName(tree, maePrincipal.name) : maePrincipal,
+      ).replace(/\\\"/g, '&quot;')}', '${bgClass}'${
+        maeIsSpouse ? ', true' : ''
+      }); return false;\">${maePrincipal.name}</a>`;
     }
   }
 
@@ -454,94 +490,187 @@ function openCardModal(name, bgClass, showSpouse = false) {
           </div>
           <div class="flex-1">
             <h3 class="text-2xl font-bold mb-1">${displayPerson.name}</h3>
-            <p class="text-gray-600 mb-2 italic">${displayPerson.born || ''}${displayPerson.born && displayPerson.death ? ' - ' : ''}${displayPerson.death || ''}</p>
+            <p class="text-gray-600 mb-2 italic">${displayPerson.born || ''}${
+    displayPerson.born && displayPerson.death ? ' - ' : ''
+  }${displayPerson.death || ''}</p>
             <ul class="mb-2 text-gray-800 text-sm">
               ${(() => {
                 const age = calculateAge(displayPerson.born, displayPerson.death);
-                return age ? `<li><span class=\"font-semibold\">Idade:</span> ${age} anos</li>` : '';
+                return age
+                  ? `<li><span class=\"font-semibold\">Idade:</span> ${age} anos</li>`
+                  : '';
               })()}
               ${paisInfo ? `<li><span class=\"font-semibold\">Pais:</span> ${paisInfo}</li>` : ''}
-              ${displayPerson.spouse ? `<li><span class=\"font-semibold\">Cônjuge:</span> ${spouseLink}</li>` : ''}
-              ${childrenLinks ? `<li><span class=\"font-semibold\">Filhos:</span> ${childrenLinks}</li>` : ''}
-              ${displayPerson.siblings ? `<li><span class=\"font-semibold\">Irmãos:</span> ${displayPerson.siblings}</li>` : ''}
-              ${displayPerson.hometown ? `<li><span class=\"font-semibold\">Cidade Natal:</span> ${(() => {
-                const idx = displayPerson.hometown.indexOf(':');
-                if (idx !== -1) {
-                  const nome = displayPerson.hometown.slice(0, idx).trim();
-                  const url = displayPerson.hometown.slice(idx + 1).trim();
-                  return `<a href=\"${url}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
-                } else if (/^https?:\/\//.test(displayPerson.hometown)) {
-                  return `<a href=\"${displayPerson.hometown}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">Ver localização</a>`;
-                } else {
-                  return displayPerson.hometown;
-                }
-              })()}</li>` : ''}
-              ${displayPerson.profession ? `<li><span class=\"font-semibold\">Profissão:</span> ${Array.isArray(displayPerson.profession) ? displayPerson.profession.join(', ') : displayPerson.profession}</li>` : ''}
-              ${displayPerson.education ? `<li><span class=\"font-semibold\">Educação:</span> ${displayPerson.education}</li>` : ''}
-              ${displayPerson.hobbies && displayPerson.hobbies.length && displayPerson.hobbies[0] !== "Desconhecido" ? `<li><span class=\"font-semibold\">Hobbies:</span> ${displayPerson.hobbies.join(', ')}</li>` : ''}
-              ${displayPerson.events && displayPerson.events.length ? `<li><span class=\"font-semibold\">Eventos:</span> ${displayPerson.events.join(', ')}</li>` : ''}
-              ${displayPerson.documents && displayPerson.documents.length ? `<li><span class=\"font-semibold\">Documentos:</span> ${displayPerson.documents.map(doc => `<a href=\"${doc}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">Ver documento</a>`).join(', ')}</li>` : ''}
-              ${displayPerson.nicknames && displayPerson.nicknames.length ? `<li><span class=\"font-semibold\">Apelidos:</span> <span class=\"italic\">${displayPerson.nicknames.join(', ')}</span></li>` : ''}
-              ${displayPerson.residence ? `<li><span class=\"font-semibold\">Residência:</span> ${displayPerson.residence}</li>` : ''}
-              ${displayPerson.religion ? `<li><span class=\"font-semibold\">Religião:</span> ${displayPerson.religion}</li>` : ''}
-              ${displayPerson.homes && displayPerson.homes.length ? `<li><span class=\"font-semibold\">Moradias:</span> ${displayPerson.homes.map(home => {
-                const idx = home.indexOf(':');
-                if (idx !== -1) {
-                  const nome = home.slice(0, idx).trim();
-                  const url = home.slice(idx + 1).trim();
-                  return `<a href=\"${url}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
-                } else {
-                  return home;
-                }
-              }).join(', ')}</li>` : ''}
-              ${exSpousesLinks ? `<li><span class=\"font-semibold\">Ex-cônjuge(s):</span> ${exSpousesLinks}</li>` : ''}
-              ${displayPerson.grave ? `<li><span class=\"font-semibold\">Túmulo:</span> ${(() => {
-                const idx = displayPerson.grave.indexOf(':');
-                if (idx !== -1) {
-                  const nome = displayPerson.grave.slice(0, idx).trim();
-                  const coordenadas = displayPerson.grave.slice(idx + 1).trim();
-                  // Verifica se são coordenadas (formato: XX°XX'XX.X"S XX°XX'XX.X"W)
-                  if (/^\d+°\d+'\d+\.\d+"[NS]\s+\d+°\d+'\d+\.\d+"[EW]$/.test(coordenadas)) {
-                    // Converte coordenadas para formato decimal
-                    const latMatch = coordenadas.match(/(\d+)°(\d+)'(\d+\.\d+)"([NS])/);
-                    const lonMatch = coordenadas.match(/(\d+)°(\d+)'(\d+\.\d+)"([EW])/);
-                    if (latMatch && lonMatch) {
-                      const latDeg = parseFloat(latMatch[1]);
-                      const latMin = parseFloat(latMatch[2]);
-                      const latSec = parseFloat(latMatch[3]);
-                      const latDir = latMatch[4];
-                      const lonDeg = parseFloat(lonMatch[1]);
-                      const lonMin = parseFloat(lonMatch[2]);
-                      const lonSec = parseFloat(lonMatch[3]);
-                      const lonDir = lonMatch[4];
-                      
-                      let lat = latDeg + latMin/60 + latSec/3600;
-                      let lon = lonDeg + lonMin/60 + lonSec/3600;
-                      
-                      if (latDir === 'S') lat = -lat;
-                      if (lonDir === 'W') lon = -lon;
-                      
-                      const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
-                      return `<a href=\"${googleMapsUrl}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
-                    }
-                  }
-                  // Se não são coordenadas, trata como URL normal
-                  if (/^https?:\/\//.test(coordenadas)) {
-                    return `<a href=\"${coordenadas}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
-                  } else {
-                    return `${nome}: ${coordenadas}`;
-                  }
-                } else if (/^https?:\/\//.test(displayPerson.grave)) {
-                  return `<a href=\"${displayPerson.grave}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">Ver localização</a>`;
-                } else {
-                  return displayPerson.grave;
-                }
-              })()}</li>` : ''}
+              ${
+                displayPerson.spouse
+                  ? `<li><span class=\"font-semibold\">Cônjuge:</span> ${spouseLink}</li>`
+                  : ''
+              }
+              ${
+                childrenLinks
+                  ? `<li><span class=\"font-semibold\">Filhos:</span> ${childrenLinks}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.siblings
+                  ? `<li><span class=\"font-semibold\">Irmãos:</span> ${displayPerson.siblings}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.hometown
+                  ? `<li><span class=\"font-semibold\">Cidade Natal:</span> ${(() => {
+                      const idx = displayPerson.hometown.indexOf(':');
+                      if (idx !== -1) {
+                        const nome = displayPerson.hometown.slice(0, idx).trim();
+                        const url = displayPerson.hometown.slice(idx + 1).trim();
+                        return `<a href=\"${url}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
+                      } else if (/^https?:\/\//.test(displayPerson.hometown)) {
+                        return `<a href=\"${displayPerson.hometown}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">Ver localização</a>`;
+                      } else {
+                        return displayPerson.hometown;
+                      }
+                    })()}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.profession
+                  ? `<li><span class=\"font-semibold\">Profissão:</span> ${
+                      Array.isArray(displayPerson.profession)
+                        ? displayPerson.profession.join(', ')
+                        : displayPerson.profession
+                    }</li>`
+                  : ''
+              }
+              ${
+                displayPerson.education
+                  ? `<li><span class=\"font-semibold\">Educação:</span> ${displayPerson.education}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.hobbies &&
+                displayPerson.hobbies.length &&
+                displayPerson.hobbies[0] !== 'Desconhecido'
+                  ? `<li><span class=\"font-semibold\">Hobbies:</span> ${displayPerson.hobbies.join(
+                      ', ',
+                    )}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.events && displayPerson.events.length
+                  ? `<li><span class=\"font-semibold\">Eventos:</span> ${displayPerson.events.join(
+                      ', ',
+                    )}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.documents && displayPerson.documents.length
+                  ? `<li><span class=\"font-semibold\">Documentos:</span> ${displayPerson.documents
+                      .map(
+                        (doc) =>
+                          `<a href=\"${doc}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">Ver documento</a>`,
+                      )
+                      .join(', ')}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.nicknames && displayPerson.nicknames.length
+                  ? `<li><span class=\"font-semibold\">Apelidos:</span> <span class=\"italic\">${displayPerson.nicknames.join(
+                      ', ',
+                    )}</span></li>`
+                  : ''
+              }
+              ${
+                displayPerson.residence
+                  ? `<li><span class=\"font-semibold\">Residência:</span> ${displayPerson.residence}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.religion
+                  ? `<li><span class=\"font-semibold\">Religião:</span> ${displayPerson.religion}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.homes && displayPerson.homes.length
+                  ? `<li><span class=\"font-semibold\">Moradias:</span> ${displayPerson.homes
+                      .map((home) => {
+                        const idx = home.indexOf(':');
+                        if (idx !== -1) {
+                          const nome = home.slice(0, idx).trim();
+                          const url = home.slice(idx + 1).trim();
+                          return `<a href=\"${url}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
+                        } else {
+                          return home;
+                        }
+                      })
+                      .join(', ')}</li>`
+                  : ''
+              }
+              ${
+                exSpousesLinks
+                  ? `<li><span class=\"font-semibold\">Ex-cônjuge(s):</span> ${exSpousesLinks}</li>`
+                  : ''
+              }
+              ${
+                displayPerson.grave
+                  ? `<li><span class=\"font-semibold\">Túmulo:</span> ${(() => {
+                      const idx = displayPerson.grave.indexOf(':');
+                      if (idx !== -1) {
+                        const nome = displayPerson.grave.slice(0, idx).trim();
+                        const coordenadas = displayPerson.grave.slice(idx + 1).trim();
+                        // Verifica se são coordenadas (formato: XX°XX'XX.X"S XX°XX'XX.X"W)
+                        if (/^\d+°\d+'\d+\.\d+"[NS]\s+\d+°\d+'\d+\.\d+"[EW]$/.test(coordenadas)) {
+                          // Converte coordenadas para formato decimal
+                          const latMatch = coordenadas.match(/(\d+)°(\d+)'(\d+\.\d+)"([NS])/);
+                          const lonMatch = coordenadas.match(/(\d+)°(\d+)'(\d+\.\d+)"([EW])/);
+                          if (latMatch && lonMatch) {
+                            const latDeg = parseFloat(latMatch[1]);
+                            const latMin = parseFloat(latMatch[2]);
+                            const latSec = parseFloat(latMatch[3]);
+                            const latDir = latMatch[4];
+                            const lonDeg = parseFloat(lonMatch[1]);
+                            const lonMin = parseFloat(lonMatch[2]);
+                            const lonSec = parseFloat(lonMatch[3]);
+                            const lonDir = lonMatch[4];
+
+                            let lat = latDeg + latMin / 60 + latSec / 3600;
+                            let lon = lonDeg + lonMin / 60 + lonSec / 3600;
+
+                            if (latDir === 'S') lat = -lat;
+                            if (lonDir === 'W') lon = -lon;
+
+                            const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+                            return `<a href=\"${googleMapsUrl}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
+                          }
+                        }
+                        // Se não são coordenadas, trata como URL normal
+                        if (/^https?:\/\//.test(coordenadas)) {
+                          return `<a href=\"${coordenadas}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">${nome}</a>`;
+                        } else {
+                          return `${nome}: ${coordenadas}`;
+                        }
+                      } else if (/^https?:\/\//.test(displayPerson.grave)) {
+                        return `<a href=\"${displayPerson.grave}\" target=\"_blank\" class=\"text-blue-600 hover:text-blue-800 transition-colors\">Ver localização</a>`;
+                      } else {
+                        return displayPerson.grave;
+                      }
+                    })()}</li>`
+                  : ''
+              }
             </ul>
             </div>
         </div>
-        ${displayPerson.quotes && displayPerson.quotes.length ? `<div class=\"w-full mt-2 max-h-32 overflow-y-auto border-t border-gray-200 pt-2 bg-gray-50 px-0\"><p class=\"block w-full text-gray-700 text-sm italic whitespace-pre-line break-words text-left\">${displayPerson.quotes.map(q => `\"${q}\"`).join('<br>')}</p></div>` : ''}
-        ${displayPerson.description ? `<div class=\"w-full mt-4 max-h-40 overflow-y-auto border-t border-gray-300 pt-3 bg-gray-50 px-0\"><p class=\"block w-full text-gray-700 text-sm whitespace-pre-line break-words text-left\">${displayPerson.description}</p></div>` : ''}
+        ${
+          displayPerson.quotes && displayPerson.quotes.length
+            ? `<div class=\"w-full mt-2 max-h-32 overflow-y-auto border-t border-gray-200 pt-2 bg-gray-50 px-0\"><p class=\"block w-full text-gray-700 text-sm italic whitespace-pre-line break-words text-left\">${displayPerson.quotes
+                .map((q) => `\"${q}\"`)
+                .join('<br>')}</p></div>`
+            : ''
+        }
+        ${
+          displayPerson.description
+            ? `<div class=\"w-full mt-4 max-h-40 overflow-y-auto border-t border-gray-300 pt-3 bg-gray-50 px-0\"><p class=\"block w-full text-gray-700 text-sm whitespace-pre-line break-words text-left\">${displayPerson.description}</p></div>`
+            : ''
+        }
       </div>
     </div>
   `;
@@ -554,7 +683,7 @@ function openCardModal(name, bgClass, showSpouse = false) {
 // =====================
 
 // Adicionar estilo global para fullscreen-img
-(function() {
+(function () {
   const style = document.createElement('style');
   style.innerHTML = `
     .fullscreen-img:fullscreen {
@@ -587,7 +716,7 @@ function openCardModal(name, bgClass, showSpouse = false) {
 })();
 
 // Função global para expandir imagem em tela cheia
-window.expandImageModal = function(btn) {
+window.expandImageModal = function (btn) {
   const img = btn.parentElement.querySelector('img');
   if (!img) return;
   // Cria um container temporário para fullscreen
@@ -625,9 +754,13 @@ window.expandImageModal = function(btn) {
   exitBtn.style.padding = '0.5rem';
   exitBtn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
   exitBtn.style.cursor = 'pointer';
-  exitBtn.onmouseover = function() { exitBtn.style.background = '#fff'; };
-  exitBtn.onmouseout = function() { exitBtn.style.background = 'rgba(255,255,255,0.8)'; };
-  exitBtn.onclick = function(e) {
+  exitBtn.onmouseover = function () {
+    exitBtn.style.background = '#fff';
+  };
+  exitBtn.onmouseout = function () {
+    exitBtn.style.background = 'rgba(255,255,255,0.8)';
+  };
+  exitBtn.onclick = function (e) {
     e.stopPropagation();
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -645,9 +778,9 @@ window.expandImageModal = function(btn) {
   } else if (container.msRequestFullscreen) {
     container.msRequestFullscreen();
   }
-}
+};
 
-document.addEventListener('fullscreenchange', function() {
+document.addEventListener('fullscreenchange', function () {
   // Remove o container temporário ao sair do fullscreen
   if (!document.fullscreenElement) {
     const container = document.querySelector('.fullscreen-img-container');
@@ -664,8 +797,8 @@ document.addEventListener('fullscreenchange', function() {
 // Função para alternar entre estruturas de árvore
 function switchTreeStructure(structure) {
   currentTreeStructure = structure;
-  
-  switch(structure) {
+
+  switch (structure) {
     case 'schultz':
       currentTree = treeSchultz;
       break;
@@ -678,10 +811,10 @@ function switchTreeStructure(structure) {
     default:
       currentTree = treeSchultz;
   }
-  
+
   renderTreeWithConnectors();
   updateTreeControls();
-  
+
   // Centraliza a árvore em relação ao primeiro casal após a mudança de estrutura
   setTimeout(() => {
     centerTreeRelativeToFirstCouple();
@@ -692,15 +825,21 @@ function switchTreeStructure(structure) {
 function updateTreeControls() {
   const controlsContainer = document.getElementById('tree-controls');
   if (!controlsContainer) return;
-  
+
   controlsContainer.innerHTML = `
-    <button onclick="switchTreeStructure('schultz')" class="${currentTreeStructure === 'schultz' ? 'active' : ''}">
+    <button onclick="switchTreeStructure('schultz')" class="${
+      currentTreeStructure === 'schultz' ? 'active' : ''
+    }">
       Árvore Schultz
     </button>
-    <button onclick="switchTreeStructure('koch')" class="${currentTreeStructure === 'koch' ? 'active' : ''}">
+    <button onclick="switchTreeStructure('koch')" class="${
+      currentTreeStructure === 'koch' ? 'active' : ''
+    }">
       Árvore Köch
     </button>
-    <button onclick="switchTreeStructure('buhring')" class="${currentTreeStructure === 'buhring' ? 'active' : ''}">
+    <button onclick="switchTreeStructure('buhring')" class="${
+      currentTreeStructure === 'buhring' ? 'active' : ''
+    }">
       Árvore Bühring
     </button>
   `;
