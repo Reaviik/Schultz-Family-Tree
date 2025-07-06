@@ -2,6 +2,7 @@
 const persons = {
   // Dead
   "Edmundo Schultz": {
+    photo: "1afFNMcM9cP18dPwR6_GHOwbXUhyvmVfQ",
     hometown: "Russia",
     grave: "Irai - SC/BR: 27°11'22.0\"S 53°15'47.0\"W",
     religion: "Ex: Luterana - IECLB",
@@ -137,30 +138,106 @@ const persons = {
   },
   // Aproved
   "Augusto Schultz": {
-    born: "01/01/1950",
-    photo: "imagens/Augusto Schultz.jpg",
+    born: "25/03/1965",
+    hometown: "Capanema - Paraná",
+    religion: "Evangelico",
+    education: "4° Série",
+    photo: "1KVJeyYF7gscETzy60NYcgJAc_hQ0wDmg",
+    profession: ["Agricultor"],
+    height: "1,80",
+    weight: "76",
     spouse: "Marli Bühring",
     children: ["David Herbert Schultz"]
   },
   // Aproved
   "Marli Bühring": {
-    born: "01/01/1955",
-    photo: "imagens/Marli Bühring.jpg",
+    born: "30/06/1974",
+    hometown: "Capanema - Paraná",
+    religion: "Luterana - IECLB",
+    nicknames: ["Polaca"],
+    education: "4° Série",
+    phone: "46 9 9978-4542",
+    photo: "1afFNMcM9cP18dPwR6_GHOwbXUhyvmVfQ",
+    homes: ["Flor da Serra - Capanema - PR/BR: 25°36'39.8\"S 53°49'09.3\"W","Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
     children: ["David Herbert Schultz"],
     hometown: "Capanema - Paraná",
     profession: ["Agricultora"],
     spouse: "Augusto Schultz",
     fathers: [
+      "Leonilda Bühring",
       "Plinio Bühring"
     ]
   },
   // Dead
-  "Plinio Bühring": {
-    profession: ["Agricultor"],
+  "Marlene Bühring": {
+    profession: ["Agricultora"],
     children: [
-      "Marli Bühring",
+      "Marli Bühring Chagas",
+      "Marcos Adriano Bühring Chagas",
     ],
   },
+  // Alive
+  "Noeli Bühring": {
+    profession: ["Agricultora"],
+    children: [
+      "Vanir",
+      "Daniele",
+      "Keniel",
+    ],
+  },
+  // Alive
+  "Noemi Bühring de Paula": {
+    children: [
+      "Ruth",
+      "Julia",
+      "Eloa",
+    ],
+  },
+  // Alive
+  "Altair Bühring": {
+    children: [
+      "Wilian",
+      "Wilton",
+      "Lilian",
+    ],
+  },
+  // Alive
+  "Adelir Bühring": {
+  },
+  // Alive
+  "Arno Bühring": {
+  },
+  // Dead
+  "Leonilda Bühring": {
+    profession: ["Agricultora"],
+    singleName: "Leonilda Müller",
+    spouse: "Plinio Bühring",
+    children: [
+      "Marli Bühring",
+      "Marlene Bühring",
+      "Noeli Bühring",
+      "Noemi Bühring de Paula",
+      "Altair Bühring",
+      "Adelir Bühring",
+      "Arno Bühring",
+    
+    ],
+  },
+  // Dead
+  "Plinio Bühring": {
+    profession: ["Agricultor"],
+    spouse: "Leonilda Bühring",
+    children: [
+      "Marli Bühring",
+      "Marlene Bühring",
+      "Noeli Bühring",
+      "Noemi Bühring de Paula",
+      "Altair Bühring",
+      "Adelir Bühring",
+      "Arno Bühring",
+    ],
+  },
+
   // Aproved
   "David Herbert Schultz": {
     born: "07/03/1995",
@@ -170,8 +247,8 @@ const persons = {
     email: "davidherbertschultz95@hotmail.com",
     hobbies: ["Jogos Eletronicos", "Programação"],
     education: "3º Completo",
-    homes: ["Flor da Serra - Capanema - PR/BR: https://maps.app.goo.gl/TMUALutbMyujvwpu7", "Cozinhador Natingui - Ortigueira - PR/BR: https://maps.app.goo.gl/Wb9wJG9kDA6vcDLK9"],
-    photo: "imagens/David Herbert Schultz.jpg",
+    homes: ["Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
+    photo: "1afFNMcM9cP18dPwR6_GHOwbXUhyvmVfQ",
     fathers:[
       "Marli Bühring",
       "Augusto Schultz"
