@@ -399,7 +399,7 @@ function openQRModal() {
                 <button type="button" onclick="expandImageModal(this)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900 transition z-10" style="background:none; border:none; outline:none;" title="Ampliar imagem">
                   <svg xmlns='http://www.w3.org/2000/svg' class='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8V6a2 2 0 012-2h2m8 0h2a2 2 0 012 2v2m0 8v2a2 2 0 01-2 2h-2m-8 0H6a2 2 0 01-2-2v-2'/></svg>
                 </button>
-                <img src="https://drive.google.com/thumbnail?id=1zjf1nssnFJP8zHqNsr93fVpR9aV0Nr3J" 
+                <img src="https://drive.google.com/thumbnail?id=1QZHbRYMFyHl-sqagKbCTOt4IsrJ1bKj1" 
                      alt="QR Code para Compartilhamento" 
                      class="w-32 h-32 rounded-lg shadow-lg border-4 border-green-200">
               </div>

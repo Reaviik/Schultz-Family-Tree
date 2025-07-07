@@ -3,7 +3,7 @@ const cardData = {
   projeto: "Árvore Genealógica Schultz",
   autor: "David Herbert Schultz",
   funcao: "Desenvolvedor e Programador",
-  qrAcesso: "https://drive.google.com/thumbnail?id=1zjf1nssnFJP8zHqNsr93fVpR9aV0Nr3J",
+  qrAcesso: "https://drive.google.com/thumbnail?id=1QZHbRYMFyHl-sqagKbCTOt4IsrJ1bKj1",
   qrPix: "https://drive.google.com/thumbnail?id=1LO-WBbDiKvKWfcS4gDio8icLLpkDiiai",
   contato: "davidherbertschultz95@hotmail.com",
   link: "https://bit.ly/Schultz-Family-Tree",
