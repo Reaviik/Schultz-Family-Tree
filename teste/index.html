@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartão do Projeto - Árvore Genealógica</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .flip-card {
+      perspective: 1200px;
+    }
+    .flip-card-inner {
+      transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    .invisible-card-face {
+      display: none !important;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-blue-500 to-pink-500 min-h-screen flex items-center justify-center">
+  <div id="card-container"></div>
+  <button id="baixar-card" class="mt-4 px-3 py-1 bg-yellow-600 text-white rounded">Baixar cartão</button>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="card.js"></script>
+</body>
+</html> 
