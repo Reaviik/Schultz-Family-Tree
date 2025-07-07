@@ -24,6 +24,44 @@ let connectors = [];
 let currentTreeStructure = 'schultz'; // 'schultz', 'koch', 'buhring'
 let currentTree = treeSchultz; // Referência para a árvore atual
 
+// Variável para debounce dos connectors
+let rafId = null;
+let lastUpdate = 0;
+
+function scheduleConnectorsUpdate() {
+  if (rafId) return;
+  rafId = requestAnimationFrame(() => {
+    connectors.forEach((line) => line.position());
+    rafId = null;
+  });
+}
+
+function updateConnectorsImmediately() {
+  // Força atualização imediata sem throttling
+  connectors.forEach((line) => {
+    try {
+      line.position();
+    } catch (error) {
+      // Ignora erros de elementos não encontrados
+    }
+  });
+}
+
+function isElementInViewport(element) {
+  if (!element || !element.getBoundingClientRect) return false;
+  
+  const rect = element.getBoundingClientRect();
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+  
+  return (
+    rect.top >= -rect.height &&
+    rect.bottom <= windowHeight + rect.height &&
+    rect.left >= -rect.width &&
+    rect.right <= windowWidth + rect.width
+  );
+}
+
 // =====================
 // Utilitários
 // =====================
@@ -141,7 +179,7 @@ function createPersonCard(name, bgClass, id) {
 function createCoupleNode(node, generation, idPrefix) {
   const person = getPersonData(node.name);
   const mainBg = generationColors[generation] || generationColors[generationColors.length - 1];
-  const spouseBg = spouseColors[generation] || spouseColors[generationColors.length - 1];
+  const spouseBg = spouseColors[generation] || spouseColors[spouseColors.length - 1];
   const mainId = `${idPrefix}-main`;
   const spouseId = `${idPrefix}-spouse`;
   let coupleHTML = '';
@@ -169,13 +207,13 @@ ${ex.children
       .join('');
   }
   if (spouse) {
-    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-1 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-1" id="${idPrefix}-container">
+    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-1 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-1" id="${idPrefix}-container" style="position: relative;">
       ${createPersonCard(person.name, mainBg, mainId)}
       ${createPersonCard(spouse.name, spouseBg, spouseId)}
       ${exSpousesHTML}
     </div>`;
   } else {
-    coupleHTML = `<div class="flex flex-row gap-4 justify-center items-stretch shadow-lg bg-white bg-opacity-0 p-1" id="${idPrefix}-container">
+    coupleHTML = `<div class="flex flex-row gap-4 justify-center items-stretch shadow-lg bg-white bg-opacity-0 p-1" id="${idPrefix}-container" style="position: relative;">
       ${createPersonCard(person.name, mainBg, mainId)}
       ${exSpousesHTML}
     </div>`;
@@ -214,8 +252,25 @@ function centerTreeRelativeToFirstCouple() {
   const treeContainer = document.getElementById('family-tree');
   if (panWrapper && treeContainer) {
     setTimeout(() => {
+      // Centralizar horizontalmente
       const scrollTo = (treeContainer.offsetWidth - panWrapper.offsetWidth) / 2;
       panWrapper.scrollLeft = scrollTo > 0 ? scrollTo : 0;
+      
+      // Centralizar verticalmente no topo
+      const firstCouple = document.getElementById('root-container');
+      if (firstCouple) {
+        const coupleRect = firstCouple.getBoundingClientRect();
+        const wrapperRect = panWrapper.getBoundingClientRect();
+        
+        // Calcular a posição para centralizar o casal no topo
+        const topOffset = 20; // Margem do topo
+        const scrollTop = firstCouple.offsetTop - topOffset;
+        
+        // Aplicar scroll vertical se necessário
+        if (panWrapper.scrollTop !== scrollTop) {
+          panWrapper.scrollTop = scrollTop;
+        }
+      }
     }, 200);
   }
 }
@@ -227,9 +282,7 @@ function renderTreeWithConnectors() {
   setTimeout(() => {
     connectAllContainers('root', currentTree);
     // Reposicionar conectores após um pequeno delay para garantir que o DOM esteja pronto
-    setTimeout(() => {
-      connectors.forEach((line) => line.position());
-    }, 50);
+    scheduleConnectorsUpdate();
     centerTreeRelativeToFirstCouple();
   }, 100);
 }
@@ -254,6 +307,8 @@ function connectAllContainers(parentId, node) {
           dash: false,
           startSocket: 'bottom',
           endSocket: 'top',
+          start: 'bottom',
+          end: 'top'
         });
         connectors.push(line);
       }
@@ -280,6 +335,8 @@ function connectAllContainers(parentId, node) {
               dash: false,
               startSocket: 'bottom',
               endSocket: 'top',
+              start: 'bottom',
+              end: 'top'
             });
             connectors.push(line);
           }
@@ -291,7 +348,7 @@ function connectAllContainers(parentId, node) {
 }
 
 window.addEventListener('resize', () => {
-  connectors.forEach((line) => line.position());
+  updateConnectorsImmediately();
   // Re-centraliza a árvore em relação ao primeiro casal após redimensionamento
   setTimeout(() => {
     centerTreeRelativeToFirstCouple();
@@ -300,7 +357,7 @@ window.addEventListener('resize', () => {
 
 // Adicionar listener para scroll para reposicionar conectores
 window.addEventListener('scroll', () => {
-  connectors.forEach((line) => line.position());
+  updateConnectorsImmediately();
 });
 
 // Adicionar listener para scroll horizontal no container da árvore
@@ -308,8 +365,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const panWrapper = document.getElementById('tree-pan-wrapper');
   if (panWrapper) {
     panWrapper.addEventListener('scroll', () => {
-      connectors.forEach((line) => line.position());
+      updateConnectorsImmediately();
     });
+    
+    // Listener específico para wheel (scroll do mouse)
+    panWrapper.addEventListener('wheel', (e) => {
+      // Força atualização imediata durante o scroll do mouse
+      updateConnectorsImmediately();
+    }, { passive: false });
   }
   
   // Observer para mudanças no DOM que podem afetar os conectores
@@ -317,9 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (treeContainer) {
     const observer = new MutationObserver(() => {
       // Reposicionar conectores quando houver mudanças no DOM
-      setTimeout(() => {
-        connectors.forEach((line) => line.position());
-      }, 10);
+      updateConnectorsImmediately();
     });
     
     observer.observe(treeContainer, {

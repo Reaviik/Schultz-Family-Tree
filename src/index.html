@@ -7,6 +7,45 @@
     <title>Árvore Genealógica Schultz</title>
     <link rel="stylesheet" href="output.css">
     <script src="https://cdn.jsdelivr.net/npm/leader-line"></script>
+    <style>
+        .flip-card {
+            perspective: 1200px;
+        }
+        .flip-card-inner {
+            transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        .invisible-card-face {
+            display: none !important;
+        }
+        
+        /* Estilos para centralizar o casal principal */
+        #tree-pan-wrapper {
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+        
+        #family-tree {
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+        
+        /* Garantir que o casal principal fique sempre visível */
+        #root-container {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
 </head>
 
 <body class="bg-gradient-to-b from-blue-500 to-pink-500 py-4 md:py-8">
