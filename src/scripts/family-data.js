@@ -2,7 +2,6 @@
 const persons = {
   // Dead
   "Edmundo Schultz": {
-    photo: "1afFNMcM9cP18dPwR6_GHOwbXUhyvmVfQ",
     hometown: "Russia",
     grave: "Irai - SC/BR: 27°11'22.0\"S 53°15'47.0\"W",
     religion: "Ex: Luterana - IECLB",
@@ -85,6 +84,7 @@ const persons = {
   "Herbert Schultz": {
     born: "16/03/1919",
     death: "18/01/1989",
+    photo: "1HgpAAS46JV9ngHOWF6ziBBEdCG-fCSMP",
     hometown: "Santa Catarina: https://maps.app.goo.gl/xiLyjfyg2EmW4i689",
     children: [
       "Augusto Schultz",
@@ -142,7 +142,7 @@ const persons = {
     hometown: "Capanema - Paraná",
     religion: "Evangelico",
     education: "4° Série",
-    photo: "1KVJeyYF7gscETzy60NYcgJAc_hQ0wDmg",
+    photo: "18AoJArWSuqs2NT2ZpXLL8bg9PDDXD8AO",
     profession: ["Agricultor"],
     height: "1,80",
     weight: "76",
@@ -157,7 +157,7 @@ const persons = {
     nicknames: ["Polaca"],
     education: "4° Série",
     phone: "46 9 9978-4542",
-    photo: "1afFNMcM9cP18dPwR6_GHOwbXUhyvmVfQ",
+    photo: "1gZIAdsPPPXf4lPshhy1kIjxG4XSRsg5z",
     homes: ["Flor da Serra - Capanema - PR/BR: 25°36'39.8\"S 53°49'09.3\"W","Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
     children: ["David Herbert Schultz"],
     hometown: "Capanema - Paraná",
@@ -165,7 +165,7 @@ const persons = {
     spouse: "Augusto Schultz",
     fathers: [
       "Leonilda Bühring",
-      "Plinio Bühring"
+      "Plinio Brixner Bühring"
     ]
   },
   // Dead
@@ -187,10 +187,34 @@ const persons = {
   },
   // Alive
   "Noemi Bühring de Paula": {
+    born: "29/05/1988",
+    photo: "1JL9CxtrJwknhTJ3KpKgBar2PVeJo0BXg",
+    spouse: "Boaventura de Paula Neto",
+    hometown: "São Leopoldo - RS/BR",
+    profession: ["Motorista", "Auxiliar de Serviços Gerais"],
+    nicknames: ["Fofa"],
+    education: "Ensino Medio Completo",
+    weight: "68kg",
+    height: "1,63",
+    phone: "46 9 9976-0986",
+    hobbies: ["Croche"],
+    homes: ["Capanema - PR/BR: 25°39'18.2\"S 53°48'38.5\"W"],
+    religion: "Luterana - IECLB",
     children: [
-      "Ruth",
-      "Julia",
-      "Eloa",
+      "Ruthy Tonielli",
+      "Julia Maykelli",
+      "Helloá Antônia",
+    ],
+  },
+  // Alive
+  "Boaventura de Paula Neto": {
+    spouse: "Noemi Bühring de Paula",
+    profession: ["Motorista", "Caminhoneiro"],
+    nicknames: ["Tula"],
+    children: [
+      "Ruthy Tonielli",
+      "Julia Maykelli",
+      "Helloá Antônia",
     ],
   },
   // Alive
@@ -207,15 +231,20 @@ const persons = {
   // Alive
   "Arno Bühring": {
   },
+  // Alive
+  "Noemia Bühring": {
+    photo: "1GEIQOLz29ESrQNwKN9UfzMGPM0rON9z2",
+  },
   // Dead
   "Leonilda Bühring": {
     profession: ["Agricultora"],
     singleName: "Leonilda Müller",
-    spouse: "Plinio Bühring",
+    spouse: "Plinio Brixner Bühring",
     children: [
       "Marli Bühring",
       "Marlene Bühring",
       "Noeli Bühring",
+      "Noemia Bühring",
       "Noemi Bühring de Paula",
       "Altair Bühring",
       "Adelir Bühring",
@@ -224,13 +253,14 @@ const persons = {
     ],
   },
   // Dead
-  "Plinio Bühring": {
+  "Plinio Brixner Bühring": {
     profession: ["Agricultor"],
     spouse: "Leonilda Bühring",
     children: [
       "Marli Bühring",
       "Marlene Bühring",
       "Noeli Bühring",
+      "Noemia Bühring",
       "Noemi Bühring de Paula",
       "Altair Bühring",
       "Adelir Bühring",
@@ -248,7 +278,7 @@ const persons = {
     hobbies: ["Jogos Eletronicos", "Programação"],
     education: "3º Completo",
     homes: ["Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
-    photo: "1afFNMcM9cP18dPwR6_GHOwbXUhyvmVfQ",
+    photo: "1Xh6Z3n8uHLjFe2oWuokTs5xYhfYOTi_f",
     fathers:[
       "Marli Bühring",
       "Augusto Schultz"
@@ -290,6 +320,7 @@ const persons = {
   },
   // Alive
   "Ingridi Schultz": {
+    photo: "1vC5mZAiyBSlgsPL6MDRy7UqLC6NSdkYL",
     fathers:[
       "Josefina Lidia Schultz",
       "Herbert Schultz"
@@ -310,6 +341,41 @@ const persons = {
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
+  },
+  // Alive
+  "Marieli Adrinani Bühring Chagas": {
+    born: "02/02/2000",
+    hometown: "Panambi - RS/BR",
+    profession: ["Mecanica", "Eletricista", "(Dona de Casa)"],
+    religion: "Luterana - IECLB",
+    nicknames: ["Mari"],
+    education: "Ensino Fundamental Completo",
+    weight: "85kg",
+    homes: ["Capanema - PR/BR: 25°39'16.2\"S 53°48'50.7\"W"],
+    phone: "46 9 9987-2143",
+    email: "buhringmarieli@gmail.com",
+    conjuge: "Anderson Junior Guaresma",
+    children: [
+      "Isabela Victoria Bühring Guaresma",
+    ],
+    fathers: [
+      "Marlene Bühring",
+      "Antinio Jairo de borba Chagas"
+    ]
+  },
+  // Alive
+  "Anderson Junior Guaresma": {
+    conjuge: "Marieli Adrinani Bühring Chagas",
+    children: [
+      "Isabela Victoria Bühring Guaresma",
+    ],
+  },
+  "Isabela Victoria Bühring Guaresma": {
+    born: "04/05/2018",
+    fathers: [
+      "Anderson Junior Guaresma",
+      "Marieli Adrinani Bühring Chagas"
+    ]
   }
 };
 
@@ -360,6 +426,10 @@ const treeSchultz = {
       name: "Daniel Schultz",
       spouse: "Lilie Reinhard Schultz",
       children: [],
+    },
+    {
+      name: "Eduardo Schultz",
+      spouse: "Wilhelmina Schultz",
     },
     {
       name: "Herbert Schultz",
@@ -443,8 +513,8 @@ const treeKoch = {
 
 // Estrutura alternativa mostrando os pais de Marli como ramificação principal
 const treeBuhring = {
-  name: "Plinio Bühring",
-  spouse: "Maria Bühring",
+  name: "Plinio Brixner Bühring",
+  spouse: "Leinilda Bühring",
   children: [
     {
       name: "Marli Bühring",
@@ -457,7 +527,7 @@ const treeBuhring = {
       name: "Marlene Bühring",
       spouse: "",
       children: [
-        { name: "Mariele Bühring Chagas" },
+        { name: "Marieli Adrinani Bühring Chagas" },
         { name: "Marcos Adriano Bühring Chagas" }
       ]
     },
@@ -488,13 +558,16 @@ const treeBuhring = {
       ]
     },
     {
-      name: "Noemi Bühring",
-      spouse: "",
+      name: "Noemi Bühring de Paula",
+      spouse: "Boaventura de Paula Neto",
       children: [
-        { name: "Ruth Tonieli" },
-        { name: "Julia de Paula" },
-        { name: "Eloa" }
+        { name: "Ruthy Tonielli" },
+        { name: "Julia Maykelli" },
+        { name: "Helloá Antônia" }
       ]
+    },
+    {
+      name: "Noemia Bühring",
     }
   ]
 };

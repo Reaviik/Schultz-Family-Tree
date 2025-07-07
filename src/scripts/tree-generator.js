@@ -116,19 +116,24 @@ function createPersonCard(name, bgClass, id) {
   const born = person.born || '';
   const death = person.death || '';
   let dateText = '';
+  let spacerDiv = '';
   if (born && death) {
     dateText = `${born} - ${death}`;
   } else if (born) {
     dateText = `${born}`;
   } else if (death) {
     dateText = `${death}`;
+  } else {
+    // Se não há data, adiciona um espaçador
+    spacerDiv = '<div class="h-4"></div>';
   }
   
   return `
-    <div id="${id}" class="w-32 mx-auto bg-white rounded-lg shadow p-2 flex flex-col items-center mt-8 cursor-pointer" onclick="openCardModal('${person.name}', '${bgClass}')">
-      <h3 class="text-base font-bold mb-1 text-center whitespace-nowrap truncate overflow-hidden max-w-full">${person.name}</h3>
-      <img src="${person.photo ? `https://drive.google.com/thumbnail?id=${person.photo}` : 'https://avatar.iran.liara.run/public/boy?username=Ash'}" alt="Foto de ${person.name}" class="w-28 h-36 rounded-lg object-cover border-4 border-blue-200 mb-1" style="aspect-ratio:3/4;">
-      <p class="text-gray-600 italic text-xs">${dateText}</p>
+    <div id="${id}" class="w-24 mx-auto bg-white rounded-lg shadow p-1 flex flex-col items-center cursor-pointer" onclick="openCardModal('${person.name}', '${bgClass}')">
+      <h3 class="text-sm font-bold mb-1 text-center whitespace-nowrap truncate overflow-hidden max-w-full pt-1">${person.name}</h3>
+      <img src="${person.photo ? `https://drive.google.com/thumbnail?id=${person.photo}` : 'https://avatar.iran.liara.run/public/boy?username=Ash'}" alt="Foto de ${person.name}" class="w-20 h-26 rounded-lg object-cover border-2 border-blue-200 mb-1" style="aspect-ratio:3/4;">
+      <p class="text-gray-600 italic text-xs pb-1">${dateText}</p>
+      ${spacerDiv}
     </div>
   `;
 }
@@ -164,13 +169,13 @@ ${ex.children
       .join('');
   }
   if (spouse) {
-    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-2 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-2" id="${idPrefix}-container">
+    coupleHTML = `<div class="flex flex-row border border-gray-300 rounded-lg gap-1 justify-center items-stretch shadow-lg bg-white bg-opacity-20 p-1" id="${idPrefix}-container">
       ${createPersonCard(person.name, mainBg, mainId)}
       ${createPersonCard(spouse.name, spouseBg, spouseId)}
       ${exSpousesHTML}
     </div>`;
   } else {
-    coupleHTML = `<div class="flex flex-row gap-6 justify-center items-stretch shadow-lg bg-white bg-opacity-0 p-2" id="${idPrefix}-container">
+    coupleHTML = `<div class="flex flex-row gap-4 justify-center items-stretch shadow-lg bg-white bg-opacity-0 p-1" id="${idPrefix}-container">
       ${createPersonCard(person.name, mainBg, mainId)}
       ${exSpousesHTML}
     </div>`;
@@ -183,8 +188,8 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
   let childrenHTML = '';
   if (node.children && node.children.length > 0) {
     childrenHTML = `
-      <div class="w-full flex justify-center" style="margin-top:40px;">
-                  <div class="inline-flex flex-row gap-6 md:gap-12 justify-center items-start">
+      <div class="w-full flex justify-center" style="margin-top:60px;">
+                  <div class="inline-flex flex-row gap-4 md:gap-8 justify-center items-start">
           ${node.children
             .map(
               (child, idx) =>
@@ -205,26 +210,12 @@ function createFamilyNode(node, generation = 0, idPrefix = 'root') {
 // =====================
 
 function centerTreeRelativeToFirstCouple() {
+  const panWrapper = document.getElementById('tree-pan-wrapper');
   const treeContainer = document.getElementById('family-tree');
-  const firstCouple = document.querySelector('#root-container');
-
-  if (treeContainer && firstCouple) {
+  if (panWrapper && treeContainer) {
     setTimeout(() => {
-      const viewportWidth = window.innerWidth;
-      const firstCoupleRect = firstCouple.getBoundingClientRect();
-      const treeRect = treeContainer.getBoundingClientRect();
-
-      // Calcula o centro do primeiro casal
-      const firstCoupleCenter = firstCoupleRect.left + firstCoupleRect.width / 2;
-
-      // Calcula o centro da árvore
-      const treeCenter = treeRect.left + treeRect.width / 2;
-
-      // Calcula o offset necessário para alinhar a árvore com o primeiro casal
-      const offset = firstCoupleCenter - treeCenter;
-
-      // Aplica a transformação para centralizar
-      treeContainer.style.transform = `translateX(${offset}px)`;
+      const scrollTo = (treeContainer.offsetWidth - panWrapper.offsetWidth) / 2;
+      panWrapper.scrollLeft = scrollTo > 0 ? scrollTo : 0;
     }, 200);
   }
 }
@@ -235,6 +226,10 @@ function renderTreeWithConnectors() {
   document.getElementById('family-tree').innerHTML = createFamilyNode(currentTree, 0, 'root');
   setTimeout(() => {
     connectAllContainers('root', currentTree);
+    // Reposicionar conectores após um pequeno delay para garantir que o DOM esteja pronto
+    setTimeout(() => {
+      connectors.forEach((line) => line.position());
+    }, 50);
     centerTreeRelativeToFirstCouple();
   }, 100);
 }
@@ -303,9 +298,204 @@ window.addEventListener('resize', () => {
   }, 100);
 });
 
+// Adicionar listener para scroll para reposicionar conectores
+window.addEventListener('scroll', () => {
+  connectors.forEach((line) => line.position());
+});
+
+// Adicionar listener para scroll horizontal no container da árvore
+document.addEventListener('DOMContentLoaded', () => {
+  const panWrapper = document.getElementById('tree-pan-wrapper');
+  if (panWrapper) {
+    panWrapper.addEventListener('scroll', () => {
+      connectors.forEach((line) => line.position());
+    });
+  }
+  
+  // Observer para mudanças no DOM que podem afetar os conectores
+  const treeContainer = document.getElementById('family-tree');
+  if (treeContainer) {
+    const observer = new MutationObserver(() => {
+      // Reposicionar conectores quando houver mudanças no DOM
+      setTimeout(() => {
+        connectors.forEach((line) => line.position());
+      }, 10);
+    });
+    
+    observer.observe(treeContainer, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
+  }
+});
+
 // =====================
 // Modal de Pessoa (adaptado para persons)
 // =====================
+
+// Função para abrir modal do QR-code
+function openQRModal() {
+  // Remove modal existente se houver
+  const existingModal = document.getElementById('qr-modal');
+  if (existingModal) existingModal.remove();
+
+  // Cria o modal
+  const modal = document.createElement('div');
+  modal.id = 'qr-modal';
+  modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+  // Fechar ao clicar fora do modal
+  modal.onclick = () => modal.remove();
+
+  modal.innerHTML = `
+    <div class="relative p-4 overflow-y-auto w-full h-full flex items-center justify-center" onclick="event.stopPropagation()">
+      <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 w-full relative" style="height: 80vh; overflow-y: auto;">
+        <!-- Botão de fechar -->
+        <button type="button" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900 transition text-sm w-8 h-8 flex justify-center items-center z-10" style="background:none; border:none; outline:none;" onclick="document.getElementById('qr-modal').remove(); event.stopPropagation();">
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+          <span class="sr-only">Fechar modal</span>
+        </button>
+        
+        <div class="text-center">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Contribua para o Projeto</h3>
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+            <p class="text-blue-800 text-sm mb-2">💝 <strong>Apoie a continuidade da árvore genealógica da família Schultz</strong></p>
+            
+            <ul class="text-blue-700 text-xs text-left mt-2 space-y-1">
+            <p class="text-blue-700 text-xs">Este projeto é mantido com dedicação e esforço. Sua contribuição ajuda a:</p>
+              <li>Adicionar mais membros da família</li>
+              <li>Melhorar a interface e funcionalidades</li>
+              <li>Manter o projeto online e atualizado</li>
+              <li>Preservar a história da família</li>
+            </ul>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="text-center">
+              <h4 class="text-sm font-semibold mb-2 text-gray-700">💝 Contribuição</h4>
+              <div class="relative inline-block">
+                <button type="button" onclick="expandImageModal(this)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900 transition z-10" style="background:none; border:none; outline:none;" title="Ampliar imagem">
+                  <svg xmlns='http://www.w3.org/2000/svg' class='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8V6a2 2 0 012-2h2m8 0h2a2 2 0 012 2v2m0 8v2a2 2 0 01-2 2h-2m-8 0H6a2 2 0 01-2-2v-2'/></svg>
+                </button>
+                <img src="https://drive.google.com/thumbnail?id=1LO-WBbDiKvKWfcS4gDio8icLLpkDiiai" 
+                     alt="QR Code para Contribuição" 
+                     class="w-32 h-32 rounded-lg shadow-lg border-4 border-blue-200">
+              </div>
+              <p class="text-xs text-gray-600 mt-1">Escaneie para contribuir</p>
+              <div class="flex justify-center space-x-2 mt-2">
+                <button onclick="downloadQRCode('contribution')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs transition-colors">
+                  Baixar
+                </button>
+                <button onclick="copyPixCode()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs transition-colors">
+                  Copiar
+                </button>
+              </div>
+            </div>
+            <div class="text-center">
+              <h4 class="text-sm font-semibold mb-2 text-gray-700">📱 Compartilhar</h4>
+              <div class="relative inline-block">
+                <button type="button" onclick="expandImageModal(this)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900 transition z-10" style="background:none; border:none; outline:none;" title="Ampliar imagem">
+                  <svg xmlns='http://www.w3.org/2000/svg' class='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8V6a2 2 0 012-2h2m8 0h2a2 2 0 012 2v2m0 8v2a2 2 0 01-2 2h-2m-8 0H6a2 2 0 01-2-2v-2'/></svg>
+                </button>
+                <img src="https://drive.google.com/thumbnail?id=1zjf1nssnFJP8zHqNsr93fVpR9aV0Nr3J" 
+                     alt="QR Code para Compartilhamento" 
+                     class="w-32 h-32 rounded-lg shadow-lg border-4 border-green-200">
+              </div>
+              <p class="text-xs text-gray-600 mt-1">Escaneie para acessar</p>
+              <div class="flex justify-center space-x-2 mt-2">
+                <button onclick="downloadQRCode('share')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs transition-colors">
+                  Baixar
+                </button>
+                <button onclick="shareQRCode('share')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs transition-colors">
+                  Compartilhar
+                </button>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-500 text-xs mt-4">Obrigado por apoiar a preservação da história da nossa família! 🙏</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+// Função para baixar o QR-code
+function downloadQRCode(type) {
+  const link = document.createElement('a');
+  
+  if (type === 'contribution') {
+    link.href = 'https://drive.google.com/uc?export=download&id=1LO-WBbDiKvKWfcS4gDio8icLLpkDiiai';
+    link.download = 'qr-code-contribuicao.png';
+  } else if (type === 'share') {
+    link.href = 'https://drive.google.com/uc?export=download&id=1zjf1nssnFJP8zHqNsr93fVpR9aV0Nr3J';
+    link.download = 'qr-code-compartilhamento.png';
+  }
+  
+  link.click();
+}
+
+// Função para obter o URL correto para compartilhamento
+function getShareURL() {
+  const currentURL = window.location.href;
+  
+  // Se estiver em localhost, use o URL do Bitly
+  if (currentURL.includes('localhost') || currentURL.includes('127.0.0.1')) {
+    return 'https://bit.ly/Schultz-Family-Tree'; // URL do Bitly
+  }
+  
+  // Se estiver em um domínio público, use o URL atual
+  return currentURL;
+}
+
+// Função para compartilhar o QR-code
+function shareQRCode(type) {
+  const shareURL = getShareURL();
+  
+  if (type === 'contribution') {
+    // Compartilhar QR-code de contribuição
+    if (navigator.share) {
+      navigator.share({
+        title: 'Contribua para a Árvore Genealógica Schultz',
+        text: 'Apoie a continuidade da árvore genealógica da família Schultz',
+        url: 'https://drive.google.com/thumbnail?id=1LO-WBbDiKvKWfcS4gDio8icLLpkDiiai'
+      });
+    } else {
+      navigator.clipboard.writeText('https://drive.google.com/thumbnail?id=1LO-WBbDiKvKWfcS4gDio8icLLpkDiiai').then(() => {
+        alert('Link do QR-code de contribuição copiado!');
+      });
+    }
+  } else if (type === 'share') {
+    // Compartilhar QR-code de compartilhamento
+    if (navigator.share) {
+      navigator.share({
+        title: 'Árvore Genealógica Schultz',
+        text: 'Acesse a árvore genealógica da família Schultz',
+        url: shareURL
+      });
+    } else {
+      navigator.clipboard.writeText(shareURL).then(() => {
+        alert('Link da árvore genealógica copiado!');
+      });
+    }
+  } else {
+    // Compartilhamento padrão (sem parâmetro)
+    if (navigator.share) {
+      navigator.share({
+        title: 'Árvore Genealógica Schultz',
+        text: 'Acesse a árvore genealógica da família Schultz',
+        url: shareURL
+      });
+    } else {
+      navigator.clipboard.writeText(shareURL).then(() => {
+        alert('Link copiado para a área de transferência!');
+      });
+    }
+  }
+}
 
 function openCardModal(name, bgClass, showSpouse = false) {
   const person = getPersonData(name);
@@ -855,3 +1045,21 @@ function createTreeControls() {
 
 renderTreeWithConnectors();
 createTreeControls();
+
+// Função para copiar código PIX
+function copyPixCode() {
+  const pixCode = "00020126360014br.gov.bcb.pix0114+55469997845425204000053039865802BR5921David Herbert Schultz6008Brasilia62080504mpda630459A4";
+  
+  navigator.clipboard.writeText(pixCode).then(() => {
+    alert('Código PIX copiado para a área de transferência!');
+  }).catch(() => {
+    // Fallback para navegadores mais antigos
+    const textArea = document.createElement('textarea');
+    textArea.value = pixCode;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    alert('Código PIX copiado para a área de transferência!');
+  });
+}
