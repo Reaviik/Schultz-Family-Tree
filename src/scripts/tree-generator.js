@@ -169,7 +169,11 @@ function createPersonCard(name, bgClass, id) {
   return `
     <div id="${id}" class="w-24 mx-auto bg-white rounded-lg shadow p-1 flex flex-col items-center cursor-pointer" onclick="openCardModal('${person.name}', '${bgClass}')">
       <h3 class="text-sm font-bold mb-1 text-center whitespace-nowrap truncate overflow-hidden max-w-full pt-1">${person.name}</h3>
-      <img src="${person.photo ? `https://drive.google.com/thumbnail?id=${person.photo}` : 'https://avatar.iran.liara.run/public/boy?username=Ash'}" alt="Foto de ${person.name}" class="w-20 h-26 rounded-lg object-cover border-2 border-blue-200 mb-1" style="aspect-ratio:3/4;">
+      <img src="${
+        person.photo && person.photo.trim() !== ''
+          ? `https://drive.google.com/thumbnail?id=${person.photo}`
+          : 'https://avatar.iran.liara.run/public/boy?username=Ash'
+      }" alt="Foto de ${person.name}" class="w-20 h-26 rounded-lg object-cover border-2 border-blue-200 mb-1" style="aspect-ratio:3/4;">
       <p class="text-gray-600 italic text-xs pb-1">${dateText}</p>
       ${spacerDiv}
     </div>
@@ -262,14 +266,10 @@ function centerTreeRelativeToFirstCouple() {
         const coupleRect = firstCouple.getBoundingClientRect();
         const wrapperRect = panWrapper.getBoundingClientRect();
         
-        // Calcular a posição para centralizar o casal no topo
-        const topOffset = 20; // Margem do topo
+        // Colar o topo da árvore no topo do wrapper
+        const topOffset = 0;
         const scrollTop = firstCouple.offsetTop - topOffset;
-        
-        // Aplicar scroll vertical se necessário
-        if (panWrapper.scrollTop !== scrollTop) {
-          panWrapper.scrollTop = scrollTop;
-        }
+        panWrapper.scrollTop = scrollTop > 0 ? scrollTop : 0;
       }
     }, 200);
   }
@@ -730,7 +730,7 @@ function openCardModal(name, bgClass, showSpouse = false) {
             </button>
             <img src="${
               displayPerson.photo && displayPerson.photo.trim() !== ''
-                ? displayPerson.photo
+                ? `https://drive.google.com/thumbnail?id=${displayPerson.photo}`
                 : 'https://avatar.iran.liara.run/public/boy?username=Ash'
             }" alt="Foto de ${
     displayPerson.name
@@ -1080,21 +1080,13 @@ function updateTreeControls() {
   if (!controlsContainer) return;
 
   controlsContainer.innerHTML = `
-    <button onclick="switchTreeStructure('schultz')" class="${
-      currentTreeStructure === 'schultz' ? 'active' : ''
-    }">
-      Árvore Schultz
-    </button>
-    <button onclick="switchTreeStructure('koch')" class="${
-      currentTreeStructure === 'koch' ? 'active' : ''
-    }">
-      Árvore Köch
-    </button>
-    <button onclick="switchTreeStructure('buhring')" class="${
-      currentTreeStructure === 'buhring' ? 'active' : ''
-    }">
-      Árvore Bühring
-    </button>
+    <div class=\"flex flex-row items-center w-full gap-2\">
+      <div class=\"flex flex-1 flex-row gap-2 justify-center\">
+        <button onclick=\"switchTreeStructure('schultz')\" class=\"${currentTreeStructure === 'schultz' ? 'active' : ''}\">Árvore Schultz</button>
+        <button onclick=\"switchTreeStructure('koch')\" class=\"${currentTreeStructure === 'koch' ? 'active' : ''}\">Árvore Köch</button>
+        <button onclick=\"switchTreeStructure('buhring')\" class=\"${currentTreeStructure === 'buhring' ? 'active' : ''}\">Árvore Bühring</button>
+      </div>
+      </div>
   `;
 }
 

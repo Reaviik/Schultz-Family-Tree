@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Participar da Árvore Genealógica</title>
+  <link rel="stylesheet" href="output.css">
+  <style>
+    body.bg-gray-900, .bg-gray-900 {
+      background: #18181b !important;
+    }
+    .dark-mode input,
+    .dark-mode textarea,
+    .dark-mode select {
+      background-color: #27272a !important;
+      color: #fff !important;
+      border-color: #444 !important;
+    }
+    .dark-mode label,
+    .dark-mode .text-gray-700,
+    .dark-mode .text-blue-700,
+    .dark-mode .text-gray-600,
+    .dark-mode .text-center,
+    .dark-mode .font-semibold {
+      color: #fff !important;
+    }
+    .dark-mode a {
+      color: #93c5fd !important;
+    }
+    .dark-mode .bg-white {
+      background-color: #27272a !important;
+    }
+    .dark-mode .bg-gray-800 {
+      background-color: #18181b !important;
+    }
+    .dark-mode .border-gray-300 {
+      border-color: #444 !important;
+    }
+    .dark-mode .bg-blue-500 {
+      background-color: #2563eb !important;
+    }
+    .dark-mode .bg-blue-600 {
+      background-color: #1d4ed8 !important;
+    }
+    .dark-mode .bg-gray-200 {
+      background-color: #444 !important;
+    }
+    .dark-mode .hover\:bg-blue-600:hover {
+      background-color: #1d4ed8 !important;
+    }
+    .dark-mode .hover\:bg-blue-500:hover {
+      background-color: #2563eb !important;
+    }
+    .dark-mode .hover\:bg-gray-400:hover {
+      background-color: #71717a !important;
+    }
+    body.dark-mode .remove-filho,
+    body.dark-mode .remove-irmao,
+    body.dark-mode .remove-profissao,
+    body.dark-mode .remove-exconjuge,
+    body.dark-mode .remove-apelido,
+    body.dark-mode .remove-hobby,
+    body.dark-mode .remove-evento,
+    body.dark-mode .remove-moradia,
+    body.dark-mode .remove-documento {
+      border: 1px solid #444 !important;
+      background: transparent !important;
+      color: #f87171 !important;
+      box-shadow: none !important;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      min-width: 2.5rem;
+      width: 2.5rem;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+    body.dark-mode .remove-filho:hover,
+    body.dark-mode .remove-irmao:hover,
+    body.dark-mode .remove-profissao:hover,
+    body.dark-mode .remove-exconjuge:hover,
+    body.dark-mode .remove-apelido:hover,
+    body.dark-mode .remove-hobby:hover,
+    body.dark-mode .remove-evento:hover,
+    body.dark-mode .remove-moradia:hover,
+    body.dark-mode .remove-documento:hover {
+      background: #f87171 !important;
+      color: #fff !important;
+      border-color: #f87171 !important;
+      border-radius: 0.25rem;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-blue-500 to-pink-500 min-h-screen flex flex-col items-center justify-center py-8">
+  <div class="bg-white rounded-lg shadow-lg p-8 max-w-xl w-full mt-20 relative" id="formCard">
+    <button type="button" id="toggleDarkMode" title="Alternar modo escuro" class="absolute top-4 right-4 bg-gray-200 hover:bg-gray-400 text-gray-800 dark:bg-gray-700 dark:text-yellow-300 rounded-full p-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 z-10">
+      <span id="darkModeIcon">🌙</span>
+    </button>
+    <h2 class="text-2xl font-bold text-center text-blue-700 mb-6">Participe da Árvore Genealógica</h2>
+    <form class="space-y-4" id="formPessoa">
+      <!-- Identificação Básica -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="nome">Nome Completo [Obrigatório]</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="nome" name="nome" placeholder="Ex: Adalberto Cestino de Melo" required class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="singleName">Nome de Solteiro(a) [Obrigatório]</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="singleName" name="singleName" placeholder="Ex: Adalberto Cestino Freitas" required class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Datas</label>
+        <div class="flex gap-2 mb-2">
+          <input type="date" id="born" name="born" required placeholder="Nascimento" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Data de Nascimento">
+          <input type="date" id="death" name="death" placeholder="Falecimento" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Data de Falecimento">
+        </div>
+        <div class="flex gap-2 mb-2">
+          <span class="flex-1 text-xs text-gray-400">Data de Nascimento [Obrigatório]</span>
+          <span class="flex-1 text-xs text-gray-400">Data de Falecimento [Opcional]</span>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="hometown">Cidade Natal [Obrigatório]</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="hometown" name="hometown" placeholder="Ex: Capanema - PR/BR" required class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="photo">Foto (URL ou upload)</label>
+        <div class="flex gap-2 mb-2">
+          <input type="url" id="photo" name="photo" placeholder="Link da foto" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <button type="button" id="btnPhotoUpload" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-2 rounded transition-colors h-[42px]">Selecionar Foto</button>
+        </div>
+        <span id="photoFileName" class="text-gray-600 text-sm"></span>
+        <input type="file" id="photoUpload" name="photoUpload" accept="image/*" class="hidden">
+      </div>
+      <!-- Relações Familiares -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1" for="pai">Nome do Pai</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="pai" name="pai" list="lista-pessoas" placeholder="Nome do Pai" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="date" id="pai_nascimento" name="pai_nascimento" placeholder="Nascimento (opcional)" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="date" id="pai_falecimento" name="pai_falecimento" placeholder="Falecimento (opcional)" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1" for="mae">Nome da Mãe</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="mae" name="mae" list="lista-pessoas" placeholder="Nome da Mãe" required class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="date" id="mae_nascimento" name="mae_nascimento" placeholder="Nascimento (opcional)" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="date" id="mae_falecimento" name="mae_falecimento" placeholder="Falecimento (opcional)" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="spouse">Cônjuge [Obrigatório se Tiver]</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="spouse" name="spouse" list="lista-pessoas" placeholder="Ex: Juliana Tavares de Melo" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div id="filhos-section">
+        <label class="block text-gray-700 font-semibold mb-1">Filhos [Obrigatório se Tiver]</label>
+        <div id="filhos-list">
+          <div class="flex flex-col md:flex-row gap-2 mb-2 filho-item">
+            <input type="text" name="filho_nome[]" list="lista-pessoas" placeholder="Nome do Filho" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input type="date" name="filho_nascimento[]" placeholder="Nascimento" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input type="date" name="filho_falecimento[]" placeholder="Falecimento (opcional)" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button type="button" class="remove-filho font-bold px-2">&times;</button>
+          </div>
+        </div>
+        <button type="button" id="add-filho" class="mt-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded transition-colors">Adicionar Filho</button>
+      </div>
+      <div id="irmaos-section">
+        <label class="block text-gray-700 font-semibold mb-1">Irmãos [Obrigatório se Tiver]</label>
+        <div id="irmaos-list">
+          <div class="flex flex-col md:flex-row gap-2 mb-2 irmao-item">
+            <input type="text" name="irmao_nome[]" list="lista-pessoas" placeholder="Nome do Irmão" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input type="date" name="irmao_nascimento[]" placeholder="Nascimento" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input type="date" name="irmao_falecimento[]" placeholder="Falecimento (opcional)" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button type="button" class="remove-irmao font-bold px-2">&times;</button>
+          </div>
+        </div>
+        <button type="button" id="add-irmao" class="mt-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded transition-colors">Adicionar Irmão</button>
+      </div>
+      <div id="profissoes-section">
+        <label class="block text-gray-700 font-semibold mb-1">Profissão(s) [Opicional]</label>
+          <div id="profissoes-list">
+            <div class="flex flex-row gap-2 mb-2 profissao-item">
+              <input type="text" name="profissao[]" placeholder="Profissão" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+              <button type="button" class="remove-profissao font-bold px-2">&times;</button>
+            </div>
+          </div>
+        <button type="button" id="add-profissao" class="mt-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded transition-colors">Adicionar Profissão</button>
+      </div>
+      <div id="exconjuges-section">
+        <label class="block text-gray-700 font-semibold mb-1">Ex-cônjuge(s) [Opicional]</label>
+        <div id="exconjuges-list">
+          <div class="flex flex-col md:flex-row gap-2 mb-2 exconjuge-item">
+            <input type="text" name="exconjuge_nome[]" placeholder="Nome do Ex-cônjuge" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button type="button" class="remove-exconjuge font-bold px-2">&times;</button>
+          </div>
+        </div>
+        <button type="button" id="add-exconjuge" class="mt-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded transition-colors">Adicionar Ex-cônjuge</button>
+      </div>
+      <!-- Contato -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Contato</label>
+        <div class="flex gap-2 mb-2">
+          <input type="tel" id="phone" name="phone" placeholder="Ex: 46 999784542" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Telefone">
+          <input type="email" id="email" name="email" placeholder="Ex: davidherbertschultz95@hotmail.com" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="E-mail">
+        </div>
+        <div class="flex gap-2 mb-2">
+          <span class="flex-1 text-xs text-gray-400">Telefone [Opcional]</span>
+          <span class="flex-1 text-xs text-gray-400">E-mail [Opcional]</span>
+        </div>
+      </div>
+      <!-- Informações Pessoais -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="education">Educação [Opicional]</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="education" name="education" placeholder="Ex: 3° Ano Completo" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="religion">Religião [Opicional]</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="religion" name="religion" placeholder="Ex: Luterana" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div id="apelidos-section">
+        <label class="block text-gray-700 font-semibold mb-1">Apelidos [Opicional]</label>
+        <div id="apelidos-list">
+          <div class="flex flex-row gap-2 mb-2 apelido-item">
+            <input type="text" name="apelido[]" placeholder="Ex: Jé" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button type="button" class="remove-apelido font-bold px-2">&times;</button>
+          </div>
+        </div>
+        <button type="button" id="add-apelido" class="mt-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded transition-colors">Adicionar Apelido</button>
+      </div>
+      <div id="hobbies-section">
+        <label class="block text-gray-700 font-semibold mb-1">Hobbies [Opicional]</label>
+        <div id="hobbies-list">
+          <div class="flex flex-row gap-2 mb-2 hobby-item">
+            <input type="text" name="hobby[]" placeholder="Ex: Passear na Praça" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button type="button" class="remove-hobby font-bold px-2">&times;</button>
+          </div>
+        </div>
+        <button type="button" id="add-hobby" class="mt-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded transition-colors">Adicionar Hobby</button>
+      </div>
+      <div id="eventos-section">
+        <label class="block text-gray-700 font-semibold mb-1" for="events">Eventos marcantes [Opicional]</label>
+        <div id="eventos-list">
+          <div class="flex flex-col md:flex-row gap-2 mb-2 evento-item">
+            <input type="text" name="evento_desc[]" placeholder="Ex: Casou-se com Maria das Dores" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input type="date" name="evento_data[]" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button type="button" class="remove-evento font-bold px-2">&times;</button>
+          </div>
+        </div>
+        <button type="button" id="add-evento" class="mt-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded transition-colors">Adicionar Evento</button>
+      </div>
+      <div id="moradias-section">
+        <label class="block text-gray-700 font-semibold mb-1" for="homes">Moradias  [Opicional]</label>
+        <div id="moradias-list">
+          <div class="flex flex-col md:flex-row gap-2 mb-2 moradia-item">
+            <input type="text" name="moradia_desc[]" placeholder="Ex: Flor da Serra - Capanema PR/BR" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <input type="url" name="moradia_link[]" placeholder="Link do Google Maps (opcional)" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button type="button" class="remove-moradia font-bold px-2">&times;</button>
+          </div>
+        </div>
+        <button type="button" id="add-moradia" class="mt-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded transition-colors">Adicionar Moradia</button>
+      </div>
+      <!-- Dados Complementares -->
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1">
+          <label class="block text-gray-700 font-semibold mb-1" for="height">Altura [Opicional]</label>
+          <select id="height" name="height" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <option value="">Selecione a altura</option>
+            <!-- opções de 1.00 a 2.50 -->
+            <!-- será preenchido por JS -->
+          </select>
+        </div>
+        <div class="flex-1">
+          <label class="block text-gray-700 font-semibold mb-1" for="weight">Peso [Opicional]</label>
+          <select id="weight" name="weight" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <option value="">Selecione o peso</option>
+            <!-- opções de 30kg a 200kg -->
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="grave">Túmulo  [Opicional]</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="grave" name="grave" placeholder="Compatilhe uma localização do google maps se souber onde exatamente é o túmulo" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <!-- Extras -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="quotes">Frase marcante [Opicional]</label>
+        <div class="flex gap-2 mb-2">
+          <input type="text" id="quotes" name="quotes" placeholder="Uma frase que só você diria" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1" for="description">Descrição/Resumo [Opicional]</label>
+        <div class="flex gap-2 mb-2">
+          <textarea id="description" name="description" placeholder="Ex: Nasci e morei em Capanema até os 5 anos, quando fui levado pelos meus pais para Ortigueira, uma cidade no centro do Paraná. Morei lá até os 17 anos e, por motivos de força maior, voltei para Capanema, onde resido até hoje." rows="3" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors">Enviar</button>
+    </form>
+    <div class="mt-4 text-center">
+      <a href="index.html" class="text-blue-600 hover:underline">Voltar para a árvore</a>
+    </div>
+  </div>
+  <datalist id="lista-pessoas"></datalist>
+  <script src="scripts/family-data.js"></script>
+  <script>
+    // Debug: Verificar se persons está disponível e quantos nomes existem
+    console.log('persons:', typeof persons, persons);
+    document.getElementById('formPessoa').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const pessoa = {};
+      // Coletar filhos
+      const filhos = [];
+      const nomes = form.querySelectorAll('input[name="filho_nome[]"]');
+      const nascimentos = form.querySelectorAll('input[name="filho_nascimento[]"]');
+      const falecimentos = form.querySelectorAll('input[name="filho_falecimento[]"]');
+      for (let i = 0; i < nomes.length; i++) {
+        const nome = nomes[i].value.trim();
+        const nascimento = nascimentos[i].value;
+        const falecimento = falecimentos[i].value;
+        if (nome) filhos.push({ nome, nascimento, falecimento });
+      }
+      pessoa.children = filhos;
+      // Coletar irmãos
+      const irmaos = [];
+      const nomesIrmaos = form.querySelectorAll('input[name="irmao_nome[]"]');
+      const nascimentosIrmaos = form.querySelectorAll('input[name="irmao_nascimento[]"]');
+      const falecimentosIrmaos = form.querySelectorAll('input[name="irmao_falecimento[]"]');
+      for (let i = 0; i < nomesIrmaos.length; i++) {
+        const nome = nomesIrmaos[i].value.trim();
+        const nascimento = nascimentosIrmaos[i].value;
+        const falecimento = falecimentosIrmaos[i].value;
+        if (nome) irmaos.push({ nome, nascimento, falecimento });
+      }
+      pessoa.siblings = irmaos;
+      // Coletar profissões
+      const profissoes = [];
+      const profs = form.querySelectorAll('input[name="profissao[]"]');
+      for (let i = 0; i < profs.length; i++) {
+        const nome = profs[i].value.trim();
+        if (nome) profissoes.push(nome);
+      }
+      pessoa.profession = profissoes;
+      // Coletar ex-cônjuges
+      const exconjuges = [];
+      const nomesEx = form.querySelectorAll('input[name="exconjuge_nome[]"]');
+      for (let i = 0; i < nomesEx.length; i++) {
+        const nome = nomesEx[i].value.trim();
+        if (nome) exconjuges.push(nome);
+      }
+      pessoa.exSpouses = exconjuges;
+      // Coletar apelidos
+      const apelidos = [];
+      const apelidosInputs = form.querySelectorAll('input[name="apelido[]"]');
+      for (let i = 0; i < apelidosInputs.length; i++) {
+        const nome = apelidosInputs[i].value.trim();
+        if (nome) apelidos.push(nome);
+      }
+      pessoa.nicknames = apelidos;
+      // Coletar hobbies
+      const hobbies = [];
+      const hobbiesInputs = form.querySelectorAll('input[name="hobby[]"]');
+      for (let i = 0; i < hobbiesInputs.length; i++) {
+        const nome = hobbiesInputs[i].value.trim();
+        if (nome) hobbies.push(nome);
+      }
+      pessoa.hobbies = hobbies;
+      // Coletar eventos
+      const eventos = [];
+      const eventosDesc = form.querySelectorAll('input[name="evento_desc[]"]');
+      const eventosData = form.querySelectorAll('input[name="evento_data[]"]');
+      for (let i = 0; i < eventosDesc.length; i++) {
+        const descricao = eventosDesc[i].value.trim();
+        const data = eventosData[i].value;
+        if (descricao) eventos.push({ descricao, data });
+      }
+      pessoa.events = eventos;
+      // Coletar moradias
+      const moradias = [];
+      const moradiasDesc = form.querySelectorAll('input[name="moradia_desc[]"]');
+      const moradiasLink = form.querySelectorAll('input[name="moradia_link[]"]');
+      for (let i = 0; i < moradiasDesc.length; i++) {
+        const descricao = moradiasDesc[i].value.trim();
+        const link = moradiasLink[i].value.trim();
+        if (descricao) moradias.push({ descricao, link });
+      }
+      pessoa.homes = moradias;
+      // Coletar dados da mãe
+      pessoa.mae_nascimento = form.mae_nascimento.value;
+      pessoa.mae_falecimento = form.mae_falecimento.value;
+      // Coletar dados do pai
+      pessoa.pai_nascimento = form.pai_nascimento.value;
+      pessoa.pai_falecimento = form.pai_falecimento.value;
+      // Coletar os outros campos normalmente
+      formData.forEach((value, key) => {
+        if (["filho_nome[]","filho_nascimento[]","irmao_nome[]","irmao_nascimento[]"].includes(key)) return;
+        if (["nicknames","hobbies","events","documents","homes","fathers","exSpouses","quotes"].includes(key)) {
+          pessoa[key] = value.split(',').map(v => v.trim()).filter(Boolean);
+        } else if (key === "photoUpload" && form.photoUpload.files.length > 0) {
+          pessoa["photoUpload"] = form.photoUpload.files[0].name;
+        } else {
+          pessoa[key] = value;
+        }
+      });
+      try {
+        const resp = await fetch('http://localhost:3333/api/salvar-pessoa', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(pessoa)
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+          alert('Dados enviados e salvos no servidor com sucesso!');
+          form.reset();
+          // Remove todos os filhos e irmãos
+          const filhosList = document.getElementById('filhos-list');
+          filhosList.innerHTML = '';
+          const irmaosList = document.getElementById('irmaos-list');
+          irmaosList.innerHTML = '';
+          document.getElementById('add-filho').click();
+          document.getElementById('add-irmao').click();
+        } else {
+          alert('Erro ao salvar: ' + (data.erro || 'Erro desconhecido'));
+        }
+      } catch (err) {
+        alert('Erro de conexão com o servidor.');
+      }
+    });
+    // Script para adicionar/remover filhos
+    document.getElementById('add-filho').addEventListener('click', function() {
+      const filhosList = document.getElementById('filhos-list');
+      const div = document.createElement('div');
+      div.className = 'flex flex-col md:flex-row gap-2 mb-2 filho-item';
+      div.innerHTML = `
+        <input type="text" name="filho_nome[]" list="lista-pessoas" placeholder="Nome do Filho" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="date" name="filho_nascimento[]" placeholder="Nascimento" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="date" name="filho_falecimento[]" placeholder="Falecimento (opcional)" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="button" class="remove-filho font-bold px-2">&times;</button>
+      `;
+      filhosList.appendChild(div);
+    });
+    document.getElementById('filhos-list').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-filho')) {
+        const item = e.target.closest('.filho-item');
+        if (item) item.remove();
+      }
+    });
+    // Script para adicionar/remover irmãos
+    document.getElementById('add-irmao').addEventListener('click', function() {
+      const irmaosList = document.getElementById('irmaos-list');
+      const div = document.createElement('div');
+      div.className = 'flex flex-col md:flex-row gap-2 mb-2 irmao-item';
+      div.innerHTML = `
+        <input type="text" name="irmao_nome[]" list="lista-pessoas" placeholder="Nome do Irmão" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="date" name="irmao_nascimento[]" placeholder="Nascimento" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="date" name="irmao_falecimento[]" placeholder="Falecimento (opcional)" class="flex-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="button" class="remove-irmao font-bold px-2">&times;</button>
+      `;
+      irmaosList.appendChild(div);
+    });
+    document.getElementById('irmaos-list').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-irmao')) {
+        const item = e.target.closest('.irmao-item');
+        if (item) item.remove();
+      }
+    });
+    // Script para adicionar/remover profissões
+    document.getElementById('add-profissao').addEventListener('click', function() {
+      const profissoesList = document.getElementById('profissoes-list');
+      const div = document.createElement('div');
+      div.className = 'flex flex-row gap-2 mb-2 profissao-item';
+      div.innerHTML = `
+        <input type="text" name="profissao[]" placeholder="Profissão" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="button" class="remove-profissao font-bold px-2">&times;</button>
+      `;
+      profissoesList.appendChild(div);
+    });
+    document.getElementById('profissoes-list').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-profissao')) {
+        const item = e.target.closest('.profissao-item');
+        if (item) item.remove();
+      }
+    });
+    // Script para adicionar/remover ex-cônjuges
+    document.getElementById('add-exconjuge').addEventListener('click', function() {
+      const exconjugesList = document.getElementById('exconjuges-list');
+      const div = document.createElement('div');
+      div.className = 'flex flex-col md:flex-row gap-2 mb-2 exconjuge-item';
+      div.innerHTML = `
+        <input type="text" name="exconjuge_nome[]" placeholder="Nome do Ex-cônjuge" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="button" class="remove-exconjuge font-bold px-2">&times;</button>
+      `;
+      exconjugesList.appendChild(div);
+    });
+    document.getElementById('exconjuges-list').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-exconjuge')) {
+        const item = e.target.closest('.exconjuge-item');
+        if (item) item.remove();
+      }
+    });
+    // Script para adicionar/remover apelidos
+    document.getElementById('add-apelido').addEventListener('click', function() {
+      const apelidosList = document.getElementById('apelidos-list');
+      const div = document.createElement('div');
+      div.className = 'flex flex-row gap-2 mb-2 apelido-item';
+      div.innerHTML = `
+        <input type="text" name="apelido[]" placeholder="Apelido" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="button" class="remove-apelido font-bold px-2">&times;</button>
+      `;
+      apelidosList.appendChild(div);
+    });
+    document.getElementById('apelidos-list').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-apelido')) {
+        const item = e.target.closest('.apelido-item');
+        if (item) item.remove();
+      }
+    });
+    // Script para adicionar/remover hobbies
+    document.getElementById('add-hobby').addEventListener('click', function() {
+      const hobbiesList = document.getElementById('hobbies-list');
+      const div = document.createElement('div');
+      div.className = 'flex flex-row gap-2 mb-2 hobby-item';
+      div.innerHTML = `
+        <input type="text" name="hobby[]" placeholder="Hobby" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="button" class="remove-hobby font-bold px-2">&times;</button>
+      `;
+      hobbiesList.appendChild(div);
+    });
+    document.getElementById('hobbies-list').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-hobby')) {
+        const item = e.target.closest('.hobby-item');
+        if (item) item.remove();
+      }
+    });
+    // Script para adicionar/remover eventos
+    document.getElementById('add-evento').addEventListener('click', function() {
+      const eventosList = document.getElementById('eventos-list');
+      const div = document.createElement('div');
+      div.className = 'flex flex-col md:flex-row gap-2 mb-2 evento-item';
+      div.innerHTML = `
+        <input type="text" name="evento_desc[]" placeholder="Ex: Casou-se com Maria das Dores" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="date" name="evento_data[]" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="button" class="remove-evento font-bold px-2">&times;</button>
+      `;
+      eventosList.appendChild(div);
+    });
+    document.getElementById('eventos-list').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-evento')) {
+        const item = e.target.closest('.evento-item');
+        if (item) item.remove();
+      }
+    });
+    // Script para adicionar/remover moradias
+    document.getElementById('add-moradia').addEventListener('click', function() {
+      const moradiasList = document.getElementById('moradias-list');
+      const div = document.createElement('div');
+      div.className = 'flex flex-col md:flex-row gap-2 mb-2 moradia-item';
+      div.innerHTML = `
+        <input type="text" name="moradia_desc[]" placeholder="Ex: Flor da Serra - Capanema PR/BR" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="url" name="moradia_link[]" placeholder="Link do Google Maps (opcional)" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="button" class="remove-moradia font-bold px-2">&times;</button>
+      `;
+      moradiasList.appendChild(div);
+    });
+    document.getElementById('moradias-list').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-moradia')) {
+        const item = e.target.closest('.moradia-item');
+        if (item) item.remove();
+      }
+    });
+    // Preencher select de altura
+    (function() {
+      const select = document.getElementById('height');
+      if (select) {
+        for (let i = 100; i <= 250; i++) {
+          const val = (i / 100).toFixed(2).replace('.', ',');
+          const opt = document.createElement('option');
+          opt.value = val;
+          opt.textContent = val + ' m';
+          select.appendChild(opt);
+        }
+      }
+    })();
+    // Preencher select de peso
+    (function() {
+      const select = document.getElementById('weight');
+      if (select) {
+        for (let i = 30; i <= 200; i++) {
+          const opt = document.createElement('option');
+          opt.value = i;
+          opt.textContent = i + ' kg';
+          select.appendChild(opt);
+        }
+      }
+    })();
+    // Preencher datalist com nomes do family-data.js
+    (function() {
+      if (typeof persons !== "undefined") {
+        const datalist = document.getElementById('lista-pessoas');
+        if (datalist) {
+          datalist.innerHTML = '';
+          const nomes = Object.keys(persons);
+          console.log('Nomes encontrados para autocomplete:', nomes.length, nomes);
+          nomes.forEach(nome => {
+            const opt = document.createElement('option');
+            opt.value = nome;
+            datalist.appendChild(opt);
+          });
+        } else {
+          console.log('Datalist não encontrado no DOM');
+        }
+      } else {
+        console.log('persons está undefined!');
+      }
+    })();
+    // Botão para acionar o upload de foto
+    document.getElementById('btnPhotoUpload').addEventListener('click', function() {
+      document.getElementById('photoUpload').click();
+    });
+    // Mostrar nome do arquivo selecionado
+    document.getElementById('photoUpload').addEventListener('change', function() {
+      const fileName = this.files.length > 0 ? this.files[0].name : '';
+      document.getElementById('photoFileName').textContent = fileName;
+    });
+    // Modo escuro
+    const darkModeBtn = document.getElementById('toggleDarkMode');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const body = document.body;
+    const formCard = document.getElementById('formCard');
+    function setDarkMode(on) {
+      if (on) {
+        body.classList.add('bg-gray-900','text-gray-100','dark-mode');
+        formCard.classList.remove('bg-white');
+        formCard.classList.add('bg-gray-800','text-gray-100');
+        darkModeIcon.textContent = '☀️';
+        localStorage.setItem('darkMode','on');
+      } else {
+        body.classList.remove('bg-gray-900','text-gray-100','dark-mode');
+        formCard.classList.remove('bg-gray-800','text-gray-100');
+        formCard.classList.add('bg-white');
+        darkModeIcon.textContent = '🌙';
+        localStorage.setItem('darkMode','off');
+      }
+    }
+    // Inicialização
+    if(localStorage.getItem('darkMode')==='on') setDarkMode(true);
+    darkModeBtn.addEventListener('click',()=>{
+      const isDark = body.classList.contains('bg-gray-900');
+      setDarkMode(!isDark);
+    });
+  </script>
+</body>
+</html> 

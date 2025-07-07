@@ -26,7 +26,7 @@ const persons = {
     hometown: "Russia",
     born: "04/01/1925",
     spouse: "Eduardo Schultz",
-    profession:"Domestica",
+    profession:["Domestica"],
     fathers:[
       "Guilherme Reicheste",
       "Maria Reicheste"
@@ -40,7 +40,7 @@ const persons = {
   "Eduardo Schultz":{
     hometown: "Russia",
     born: "02/01/1916",
-    profession:"Agricultor",
+    profession:["Agricultor"],
     spouse: "Wilhelmina Reicheste",
     fathers:[
       "Edmundo Schultz",
@@ -160,7 +160,7 @@ const persons = {
     photo: "1gZIAdsPPPXf4lPshhy1kIjxG4XSRsg5z",
     homes: ["Flor da Serra - Capanema - PR/BR: 25°36'39.8\"S 53°49'09.3\"W","Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
     children: ["David Herbert Schultz"],
-    hometown: "Capanema - Paraná",
+    hometown: "Capanema - PR/BR: 25°40'18.8\"S 53°48'28.4\"W",
     profession: ["Agricultora"],
     spouse: "Augusto Schultz",
     fathers: [
@@ -272,7 +272,7 @@ const persons = {
   "David Herbert Schultz": {
     born: "07/03/1995",
     hometown: "Flor da Serra - Capanema - PR/BR: https://maps.app.goo.gl/YQ1k8qkpC3sipDEz5",
-    profession: "Agricultor",
+    profession: ["Agricultor"],
     religion: "Luterana - IECLB",
     email: "davidherbertschultz95@hotmail.com",
     hobbies: ["Jogos Eletronicos", "Programação"],
@@ -285,7 +285,9 @@ const persons = {
     ],
   },
   // Alive
-  "Maria de Lurdes": {
+  "Maria de Lurdes Correia": {
+    singleName: "Maria de Lurdes",
+    homes: ["São Cristovão - Capanema PR/BR: 25°39'20.4\"S 53°48'38.4\"W"],
     fathers:[
       "Josefina Lidia Schultz",
       "Herbert Schultz"
@@ -297,19 +299,103 @@ const persons = {
   "Ivo Correia": {
   },
   // Alive
-  "Carlos Correia": {
+  "Paulo Eder Correia":{
+    born: "10/10/1983",
+    conjuge: "Suzana Terezinha Brito",
+    hometown: "Foz do Iguaçu: 25°30'59.6\"S 54°35'07.0\"W",
+    profession: ["Auxiliar de Produção"],
+    religion: "Catóico",
+    education: "Ensino Medio Incompleto",
+    weight: "95kg",
+    height: "1.80",
+    phone: "43 991506301",
+    email: "pauloederc@gmail.com",
+    homes: ["Três Angicos - Capanema PR/BR: 25°39'52.7\"S 53°47'02.9\"W"],
+    children: [
+      "Weslei Gabriel Correia",
+      "Ravi Correia"
+    ],
     fathers:[
-      "Maria de Lurdes",
+      "Maria de Lurdes Correia",
       "Ivo Correia"
     ],
   },
-  // Alive
-  "Veranice Schultz": {
-    born: "01/01/1958",
-    fathers:[
-      "Josefina Lidia Schultz",
-      "Herbert Schultz"
+  "Suzana Terezinha Brito":{
+    born: "14/08/1984",
+    conjuge: "Paulo Eder Correia",
+    hometown: "Capanema - PR/BR: 25°40'18.8\"S 53°48'28.4\"W",
+    homes: ["Três Angicos - Capanema PR/BR: 25°39'52.7\"S 53°47'02.9\"W"],
+    profession: ["Auxiliar de Produção"],
+    religion: "Católica",
+    nicknames: ["Suzi"],
+    education: "Ensino Superior Completo",
+    weight: "69kg",
+    height: "1.56",
+    phone: "46 999870997",
+    email: "suzanat.brito3@gmail.com",
+    homes: ["Três Angicos - Capanema PR/BR: 25°39'52.7\"S 53°47'02.9\"W"],
+    children: [
+      "Weslei Gabriel Correia",
+      "Ravi Correia"
     ],
+    fathers:[
+      "Clarita B.G. Brito",
+      "Adão Ataeibio Correia"
+    ],
+  },
+  "Weslei Gabriel Correia":{
+    fathers:[
+      "Paulo Eder Correia",
+      "Suzana Terezinha Brito"
+    ],
+  },
+  "Ravi Correia":{
+    fathers:[
+      "Paulo Eder Correia",
+      "Suzana Terezinha Brito"
+    ],
+  },
+  // Alive
+  "Carlos Correia": {
+    born: "12/09/19988",
+    hometown: "Capanema PR/BR: 25°40'18.8\"S 53°48'28.4\"W",
+    conjuge: "Juliane Camargo",
+    profession: ["Auxiliar"],
+    religion: "Evangelico",
+    nicknames: ["Kau"],
+    education: "Ensino Medio",
+    weight: "119lkg",
+    height: "1.80",
+    phone: "46 999744959",
+    homes: ["São Cristovão - Capanema PR/BR: 25°39'20.3\"S 53°48'38.8\"W"],
+    fathers:[
+      "Maria de Lurdes Correia",
+      "Ivo Correia"
+    ],
+  },
+  "Juliane Camargo":{
+    conjuge: "Carlos Correia",
+  },
+  // Alive
+  "Maria Daloé Correia": {
+    born: "09/01/1981",
+    hometown: "Foz do Iguaçu: 25°30'59.6\"S 54°35'07.0\"W",
+    profession: ["Auxiliar de Produção"],
+    nicknames: ["Nega"],
+    education: "Ensino Medio",
+    weight: "93kg",
+    height: "1.60",
+    phone: "46 999222199",
+    email: "correiamaria499@gmail.com",
+    homes: ["São Cristovão Capanema: 25°39'20.2\"S 53°48'39.3\"W"],
+    fathers:[
+      "Maria de Lurdes Correia",
+      "Ivo Correia"
+    ],
+    children:[
+      "Vitória Arieli Correia Lemos",
+      "Deivid Riquelme Correia Lemos"
+    ]
   },
   // Alive
   "Loreni Schultz": {
@@ -376,6 +462,111 @@ const persons = {
       "Anderson Junior Guaresma",
       "Marieli Adrinani Bühring Chagas"
     ]
+  },
+  "José Pedro Fagundes": {
+    children: [
+      "Sarassandra Fagundes",
+      "Eliziane Fagundes",
+      "Elizandra Fagundes",
+      "Jonas Dassant Fagundes",
+    ],
+  },
+  // Alive
+  "Veranice Fagundes": {
+    born: "01/01/1958",
+    singleName: "Veranice Schultz",
+    homes: ["Canela: 29°21'49.6\"S 50°48'40.4\"W","Capanema: 25°40'18.9\"S 53°48'28.1\"W"],
+    fathers:[
+      "Josefina Lidia Schultz",
+      "Herbert Schultz"
+    ],
+    children: [
+      "Sarassandra Fagundes",
+      "Eliziane Fagundes",
+      "Elizandra Fagundes",
+      "Jonas Dassant Fagundes",
+    ],
+  },
+  "Sarassandra Fagundes": {
+    singleName: "Sarassandra Fagundes",
+    born: "27/11/1989",
+    hometown: "Capanema - PR/BR: 25°40'18.8\"S 53°48'28.4\"W",
+    fathers: [
+      "Veranice Fagundes",
+      "José Pedro Fagundes"
+    ],
+    children: [
+      "Lidia Lorena Rauro"
+    ],
+    profession: ["Farmacêutica"],
+    nicknames: ["Sara"],
+    education: "Ensino Superior Completo",
+    religion: "Católica",
+    height: "1,65",
+    weight: "77"
+  },
+  "Eliziane Fagundes": {
+    born: "10/06/1992",
+    fathers: [
+      "Veranice Fagundes",
+      "José Pedro Fagundes"
+    ],
+  },
+  "Elizandra Fagundes": {
+    born: "27/11/1989",
+    hometown: "Capanema: 25°40'18.9\"S 53°48'28.1\"W",
+    conjuge: "Argu Rodrigo de Freitas",
+    profession: ["Autonoma"],
+    religion: "Católica",
+    nicknames: ["Liza"],
+    education: "Ensino Medio Completo",
+    weight: "64kg",
+    height: "1.65",
+    phone: "46 999187059",
+    homes: ["São Cristovão Capanema PR/BR: 25°40'18.9\"S 53°48'28.1\"W"],
+    children:[
+      "Livia Lais de Freitas",
+      "Melissa Rafaela de Freitas"
+    ],
+    fathers: [
+      "Veranice Fagundes",
+      "José Pedro Fagundes"
+    ],
+  },
+  "Argu Rodrigo de Freitas":{
+    children:[
+      "Livia Lais de Freitas",
+      "Melissa Rafaela de Freitas"
+    ],
+  },
+  "Livia Lais de Freitas":{
+    fathers:[
+      "Elizandra Fagundes",
+      "Argu Rodrigo de Freitas"
+    ]
+  },
+  "Melissa Rafaela de Freitas":{
+    fathers:[
+      "Elizandra Fagundes",
+      "Argu Rodrigo de Freitas"
+    ]
+  },
+  "Jonas Dassant Fagundes": {
+    born: "06/04/2001",
+    hometown: "Capanema: 25°40'18.9\"S 53°48'28.1\"W",
+    profession: ["Exercito", "Montador de Móveis", "Eletricista"],
+    religion: "Cristão",
+    nicknames: ["Nene"],
+    weight: "80",
+    height: "1.73",
+    phone: "45 999849767",
+    email: "sddassant859@gmail.com",
+    hobbies: ["Futebol", "Vôlei", "Jogos", "Sinuca"],
+    homes: ["São Cristovão Capanema: 25°39'19.8\"S 53°48'42.4\"W", "Cascavel: 24°57'15.2\"S 53°28'48.8\"W"],
+    fathers: [
+      "Veranice Fagundes",
+      "José Pedro Fagundes"
+    ],
   }
 };
 
@@ -401,13 +592,45 @@ const tree = {
           ]
         },
         {
-          name: "Maria de Lurdes",
+          name: "Maria de Lurdes Correia",
           spouse: "Ivo Correia",
           children: [
-            { name: "Carlos Correia" }
+            { name: "Maria Daloé Correia",
+              children: [
+                { name: "Vitória Arieli Correia Lemos" },
+                { name: "Deivid Riquelme Correia Lemos" }
+              ]
+             },
+            { name: "Paulo Eder Correia",
+              spouse: "Suzana Terezinha Brito",
+              children: [
+                { name: "Weslei Gabriel Correia" },
+                { name: "Ravi Correia" }
+              ]
+            },
+            { name: "Carlos Correia",
+              conjuge: "Juliane Camargo",
+             },
+            { name: "Cezar Correia" },
+            { name: "Joarez Correia" }
           ]
         },
-        { name: "Veranice Schultz" },
+        { 
+          name: "Veranice Schultz",
+          spouse: "Jé Fagundes",
+          children: [
+            { name: "Eliziane Fagundes" },
+            { name: "Sarassandra Fagundes" },
+            { name: "Elizandra Fagundes",
+              spouse: "Argu Rodrigo de Freitas",
+              children: [
+                { name: "Livia Lais de Freitas" },
+                { name: "Melissa Rafaela de Freitas" }
+              ]
+             },
+            { name: "Jonas Fagundes" },
+          ]
+        },
         { name: "Loreni Schultz" },
         { name: "Ingridi Schultz" },
         { name: "Marcio Leandro Schultz" },
@@ -443,10 +666,25 @@ const treeSchultz = {
           ]
         },
         {
-          name: "Maria de Lurdes",
+          name: "Maria de Lurdes Correia",
           spouse: "Ivo Correia",
           children: [
-            { name: "Carlos Correia" },
+            { name: "Maria Daloé Correia",
+              children: [
+                { name: "Vitória Arieli Correia Lemos" },
+                { name: "Deivid Riquelme Correia Lemos" }
+              ]
+             },
+            { name: "Paulo Eder Correia",
+              spouse: "Suzana Terezinha Brito",
+              children: [
+                { name: "Weslei Gabriel Correia" },
+                { name: "Ravi Correia" }
+              ]
+            },
+            { name: "Carlos Correia",
+              conjuge: "Juliane Camargo",
+             },
             { name: "Cezar Correia" },
             { name: "Joarez Correia" }
           ]
@@ -455,9 +693,15 @@ const treeSchultz = {
           name: "Veranice Schultz",
           spouse: "Jé Fagundes",
           children: [
-            { name: "Eliziane" },
-            { name: "Sarasandra Fagundes" },
-            { name: "Elizandra Fagundes" },
+            { name: "Eliziane Fagundes" },
+            { name: "Sarassandra Fagundes" },
+            { name: "Elizandra Fagundes",
+              spouse: "Argu Rodrigo de Freitas",
+              children: [
+                { name: "Livia Lais de Freitas" },
+                { name: "Melissa Rafaela de Freitas" }
+              ]
+             },
             { name: "Jonas Fagundes" },
           ]
         },
@@ -469,8 +713,8 @@ const treeSchultz = {
           ]
         },
         { name: "Ingridi Schultz" },
-        { name: "Marcio Leandro Schultz" },
-        { name: "Erni Herbert Schultz" }
+        { name: "Marcio Leandro Schultz"},
+        { name: "Erni Herbert Schultz"}
       ]
     }
   ]
@@ -493,7 +737,7 @@ const treeKoch = {
           ]
         },
         {
-          name: "Maria de Lurdes",
+          name: "Maria de Lurdes Correia",
           spouse: "Ivo Correia",
           children: [
             { name: "Carlos Correia" },

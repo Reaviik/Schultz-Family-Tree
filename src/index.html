@@ -7,74 +7,41 @@
     <title>Árvore Genealógica Schultz</title>
     <link rel="stylesheet" href="output.css">
     <script src="https://cdn.jsdelivr.net/npm/leader-line"></script>
-    <style>
-        .flip-card {
-            perspective: 1200px;
-        }
-        .flip-card-inner {
-            transition: transform 0.7s cubic-bezier(.4,2,.6,1);
-            transform-style: preserve-3d;
-        }
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-        .flip-card-back {
-            transform: rotateY(180deg);
-        }
-        .invisible-card-face {
-            display: none !important;
-        }
-        
-        /* Estilos para centralizar o casal principal */
-        #tree-pan-wrapper {
-            overflow: auto;
-            scroll-behavior: smooth;
-        }
-        
-        #family-tree {
-            padding-top: 20px;
-            padding-bottom: 40px;
-        }
-        
-        /* Garantir que o casal principal fique sempre visível */
-        #root-container {
-            position: relative;
-            z-index: 10;
-        }
-    </style>
 </head>
 
-<body class="bg-gradient-to-b from-blue-500 to-pink-500 py-4 md:py-8">
-    <div class="w-full fixed top-0 left-0 z-50 bg-blue-600 shadow-md backdrop-blur-sm">
-        <div class="relative px-4 py-3 md:py-4">
-            <h1 class="text-2xl md:text-3xl font-bold text-center text-white">Árvore Genealógica Schultz</h1>
-            <img src="https://drive.google.com/thumbnail?id=1KGmCTMABJNPqd9RnQIzkkaUAxgGDZV5G"
-                 alt="QR Code" 
-                 class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 md:w-23 md:h-23 rounded-lg shadow-md cursor-pointer hover:scale-110 transition-transform"
-                 style="image-rendering: pixelated;"
-                 onclick="openQRModal()">
+<body class="min-h-screen flex flex-col">
+    <!-- Header fixo -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-blue-600 shadow-md">
+        <div class="px-4 py-3 flex flex-col md:flex-row items-center justify-center gap-2 relative">
+            <h1 class="text-2xl md:text-3xl font-bold text-white text-center w-full">Árvore Genealógica Schultz</h1>
+            <div class="flex flex-row gap-4 items-center justify-center absolute right-4 top-1/2 -translate-y-1/2 md:static md:translate-y-0 md:ml-4">
+                <button onclick="window.location.href='formulario.html'" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded shadow transition-colors">Participar</button>
+                <img src="https://drive.google.com/thumbnail?id=1KGmCTMABJNPqd9RnQIzkkaUAxgGDZV5G"
+                     alt="QR Code"
+                     class="w-10 h-10 rounded-lg shadow-md cursor-pointer hover:scale-110 transition-transform"
+                     style="image-rendering: pixelated;"
+                     onclick="openQRModal()">
+            </div>
         </div>
-        <div id="tree-controls">
-            <!-- Os controles de árvore serão inseridos aqui pelo JavaScript -->
-        </div>
+    </header>
+    <!-- Div dos botões fixa logo abaixo do header -->
+    <div class="fixed top-16 md:top-20 left-0 w-full z-40 bg-white shadow flex justify-center items-center gap-4 py-2">
+        <div id="tree-controls" class="flex gap-2"></div>
     </div>
-    <div class="pt-32 md:pt-40 w-full items-start">
-        <div id="tree-pan-wrapper" class="w-full">
-            <div id="tree-canvas" class="relative min-h-screen flex justify-center">
+    <!-- Espaço para compensar header + botões -->
+    <div class="h-28 md:h-32"></div>
+    <!-- Árvore ocupa o resto -->
+    <main class="flex-1 w-full overflow-auto">
+        <div id="tree-pan-wrapper" class="w-full h-full">
+            <div id="tree-canvas" class="relative min-h-screen flex justify-center bg-gradient-to-b from-blue-50 via-white to-blue-100">
                 <div id="family-tree" class="tree">
                     <!-- Estrutura da árvore será gerada pelo JavaScript -->
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     <script src="scripts/family-data.js"></script>
     <script src="scripts/tree-generator.js"></script>
-
-
 </body>
 
 </html>

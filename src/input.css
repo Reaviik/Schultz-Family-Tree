@@ -197,3 +197,29 @@ body {
 #tree-controls button:not(.active):hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
+
+/* ====== Estilos customizados da árvore ====== */
+.flip-card {
+  perspective: 1200px;
+}
+.flip-card-inner {
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+  transform-style: preserve-3d;
+}
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+.invisible-card-face {
+  display: none !important;
+}
+#root-container {
+  position: relative;
+  z-index: 10;
+}
