@@ -16,8 +16,10 @@ app.use(cors({
   origin: 'https://schultz-family-tree.netlify.app'
 }));
 
-// Log especial para OPTIONS (preflight)
-app.options('*', (req, res) => {
+// Tratar todas as requisições OPTIONS antes das rotas
+app.options('*', cors({
+  origin: 'https://schultz-family-tree.netlify.app'
+}), (req, res) => {
   console.log('Recebido OPTIONS (preflight) para:', req.originalUrl);
   res.sendStatus(204);
 });
