@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 
 const app = express();
 const PORT = 3333;
@@ -111,6 +112,9 @@ app.post('/api/salvar-pessoa', (req, res) => {
       return res.status(500).json({erro: 'Erro ao salvar arquivo'});
     }
     res.json({ok: true, arquivo: fileName});
+    axios.post('http://localhost:4000/api/receber-formulario', pessoa)
+      .then(() => console.log('Enviado para o bot com sucesso!'))
+      .catch(err => console.error('Erro ao enviar para o bot:', err.message));
   });
 });
 
