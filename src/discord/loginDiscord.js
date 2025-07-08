@@ -1,6 +1,6 @@
+require('dotenv').config();
 // Require the necessary discord.js classes
 const { Client, GatewayIntentBits, Partials, Collection, Events, PermissionFlagsBits } = require("discord.js");
-const config = require('./config/config.json');
 
 // Create a new client instance
 const discordClient = new Client({
@@ -35,6 +35,22 @@ discordClient.once(Events.ClientReady, readyClient => {
     discordClient.on(Events.MessageUpdate, async (oldMessage, newMessage) => {
 	});
 });
-discordClient.login(config.discord.DISCORD_TOKEN);
+
+discordClient.once('ready', () => {
+    console.log(`Bot online como ${discordClient.user.tag}`);
+    const guild = discordClient.guilds.cache.get('312220535801118721');
+    if (guild) {
+        const channel = guild.channels.cache.get('547393153938751489');
+        if (channel && channel.isTextBased && channel.isTextBased()) {
+            channel.send('Bot está online!');
+        } else {
+            console.log('Canal não encontrado ou não é de texto.');
+        }
+    } else {
+        console.log('Guild não encontrada.');
+    }
+});
+
+discordClient.login(process.env.DISCORD_TOKEN);
 
 module.exports = discordClient;
