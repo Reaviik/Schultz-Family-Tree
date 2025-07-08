@@ -420,7 +420,7 @@
         }
       });
       try {
-        const resp = await fetch('https://familia-schultz-api.onrender.com/api/salvar-pessoa', {
+        const resp = await fetch('http://localhost:3333/api/salvar-pessoa', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(pessoa)
