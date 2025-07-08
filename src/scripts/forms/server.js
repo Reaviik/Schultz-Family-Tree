@@ -7,9 +7,21 @@ const axios = require('axios');
 const app = express();
 const PORT = 3333;
 
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 app.use(cors({
   origin: 'https://schultz-family-tree.netlify.app'
 }));
+
+// Log especial para OPTIONS (preflight)
+app.options('*', (req, res) => {
+  console.log('Recebido OPTIONS (preflight) para:', req.originalUrl);
+  res.sendStatus(204);
+});
+
 app.use(express.json({limit: '2mb'}));
 
 app.post('/api/salvar-pessoa', (req, res) => {
