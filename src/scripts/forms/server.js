@@ -7,7 +7,9 @@ const axios = require('axios');
 const app = express();
 const PORT = 3333;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://schultz-family-tree.netlify.app'
+}));
 app.use(express.json({limit: '2mb'}));
 
 app.post('/api/salvar-pessoa', (req, res) => {
