@@ -112,12 +112,12 @@ app.post('/api/salvar-pessoa', (req, res) => {
       return res.status(500).json({erro: 'Erro ao salvar arquivo'});
     }
     res.json({ok: true, arquivo: fileName});
-    axios.post('http://localhost:4000/api/receber-formulario', pessoa)
+    axios.post('https://familia-schultz-api.onrender.com/api/receber-formulario', pessoa)
       .then(() => console.log('Enviado para o bot com sucesso!'))
       .catch(err => console.error('Erro ao enviar para o bot:', err.message));
   });
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Servidor rodando em https://schultz-family-tree.netlify.app/:${PORT}`);
 }); 
