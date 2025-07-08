@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Árvore Genealógica Schultz</title>
-    <link rel="stylesheet" href="output.css">
+    <link href="./output.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/leader-line"></script>
 </head>
 
@@ -25,15 +25,13 @@
         </div>
     </header>
     <!-- Div dos botões fixa logo abaixo do header -->
-    <div class="fixed top-16 md:top-20 left-0 w-full z-40 bg-white shadow flex justify-center items-center gap-4 py-2">
+    <div class="fixed top-16 md:top-19 left-0 w-full z-40 bg-white shadow flex justify-center items-center gap-4">
         <div id="tree-controls" class="flex gap-2"></div>
     </div>
-    <!-- Espaço para compensar header + botões -->
-    <div class="h-28 md:h-32"></div>
     <!-- Árvore ocupa o resto -->
     <main class="flex-1 w-full overflow-auto">
         <div id="tree-pan-wrapper" class="w-full h-full">
-            <div id="tree-canvas" class="relative min-h-screen flex justify-center bg-gradient-to-b from-blue-50 via-white to-blue-100">
+            <div id="tree-canvas" class="relative min-h-screen flex justify-center bg-gradient-to-tr from-blue-600 to-pink-700">
                 <div id="family-tree" class="tree">
                     <!-- Estrutura da árvore será gerada pelo JavaScript -->
                 </div>

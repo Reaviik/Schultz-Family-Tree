@@ -124,44 +124,21 @@ html {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.1);
 }
-
-/* Melhorar comportamento do scroll e zoom */
-@media (max-width: 768px) {
-  #tree-pan-wrapper {
-    height: calc(100vh - 100px);
-  }
-}
-
-/* Garantir que o conteúdo seja sempre visível */
-body {
-  min-height: 100vh;
-  overflow-x: auto;
-  overflow-y: auto;
-}
 /* Garantir que a árvore tenha largura mínima */
 #family-tree {
   min-width: max-content;
   width: max-content;
   padding: 20px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 /* Container da árvore */
 #tree-pan-wrapper {
   overflow-x: auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   width: 100%;
-  height: calc(100vh - 120px); /* Altura total menos o cabeçalho */
 }
 #tree-canvas {
   min-width: max-content;
-  min-height: 100%;
   padding: 0 20px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
 }
 /* Estilo dos controles de árvore no cabeçalho */
 #tree-controls {
@@ -196,30 +173,4 @@ body {
 }
 #tree-controls button:not(.active):hover {
   background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* ====== Estilos customizados da árvore ====== */
-.flip-card {
-  perspective: 1200px;
-}
-.flip-card-inner {
-  transition: transform 0.7s cubic-bezier(.4,2,.6,1);
-  transform-style: preserve-3d;
-}
-.flip-card.flipped .flip-card-inner {
-  transform: rotateY(180deg);
-}
-.flip-card-front, .flip-card-back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.flip-card-back {
-  transform: rotateY(180deg);
-}
-.invisible-card-face {
-  display: none !important;
-}
-#root-container {
-  position: relative;
-  z-index: 10;
 }
