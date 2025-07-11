@@ -201,7 +201,7 @@ const persons = {
     homes: ["Capanema - PR/BR: 25°39'18.2\"S 53°48'38.5\"W"],
     religion: "Luterana - IECLB",
     children: [
-      "Ruthy Tonielli",
+      "Ruthy Tonielli Bühring Lucas",
       "Julia Maykelli",
       "Helloá Antônia",
     ],
@@ -212,10 +212,26 @@ const persons = {
     profession: ["Motorista", "Caminhoneiro"],
     nicknames: ["Tula"],
     children: [
-      "Ruthy Tonielli",
       "Julia Maykelli",
       "Helloá Antônia",
     ],
+  },
+  // Alive
+  "Ruthy Tonielli Bühring Lucas":{
+    born: "07/05/2005",
+    hometown: "Capanema - PR/BR: 25°39'18.2\"S 53°48'38.5\"W",
+    profession: ["Futura Biologa"],
+    religion: "Luterana - IECLB",
+    nicknames: ["Nena"],
+    education: "Ensino Medio Completo, Cursando Biologia",
+    height: "1,70",
+    phone: "46 999736179",
+    email: "toniellyr@gmail.com",
+    hobbies: ["Leitura", "Assistir Jogos do Time"],
+    fathers: [
+      "Noemi Bühring de Paula",
+      "Toniel Lucas"
+    ]
   },
   // Alive
   "Altair Bühring": {
@@ -320,6 +336,7 @@ const persons = {
       "Ivo Correia"
     ],
   },
+  // Alive
   "Suzana Terezinha Brito":{
     born: "14/08/1984",
     conjuge: "Paulo Eder Correia",
@@ -349,6 +366,7 @@ const persons = {
       "Suzana Terezinha Brito"
     ],
   },
+  // Alive
   "Ravi Correia":{
     fathers:[
       "Paulo Eder Correia",
@@ -373,6 +391,7 @@ const persons = {
       "Ivo Correia"
     ],
   },
+  // Alive
   "Juliane Camargo":{
     conjuge: "Carlos Correia",
   },
@@ -456,6 +475,7 @@ const persons = {
       "Isabela Victoria Bühring Guaresma",
     ],
   },
+  // Alive
   "Isabela Victoria Bühring Guaresma": {
     born: "04/05/2018",
     fathers: [
@@ -463,6 +483,7 @@ const persons = {
       "Marieli Adrinani Bühring Chagas"
     ]
   },
+  // Alive
   "José Pedro Fagundes": {
     children: [
       "Sarassandra Fagundes",
@@ -487,6 +508,7 @@ const persons = {
       "Jonas Dassant Fagundes",
     ],
   },
+  // Alive
   "Sarassandra Fagundes": {
     singleName: "Sarassandra Fagundes",
     born: "27/11/1989",
@@ -505,6 +527,7 @@ const persons = {
     height: "1,65",
     weight: "77"
   },
+  // Alive
   "Eliziane Fagundes": {
     born: "10/06/1992",
     fathers: [
@@ -512,6 +535,7 @@ const persons = {
       "José Pedro Fagundes"
     ],
   },
+  // Alive
   "Elizandra Fagundes": {
     born: "27/11/1989",
     hometown: "Capanema: 25°40'18.9\"S 53°48'28.1\"W",
@@ -533,24 +557,28 @@ const persons = {
       "José Pedro Fagundes"
     ],
   },
+  // Alive
   "Argu Rodrigo de Freitas":{
     children:[
       "Livia Lais de Freitas",
       "Melissa Rafaela de Freitas"
     ],
   },
+  // Alive
   "Livia Lais de Freitas":{
     fathers:[
       "Elizandra Fagundes",
       "Argu Rodrigo de Freitas"
     ]
   },
+  // Alive
   "Melissa Rafaela de Freitas":{
     fathers:[
       "Elizandra Fagundes",
       "Argu Rodrigo de Freitas"
     ]
   },
+  // Alive
   "Jonas Dassant Fagundes": {
     born: "06/04/2001",
     hometown: "Capanema: 25°40'18.9\"S 53°48'28.1\"W",
@@ -805,7 +833,7 @@ const treeBuhring = {
       name: "Noemi Bühring de Paula",
       spouse: "Boaventura de Paula Neto",
       children: [
-        { name: "Ruthy Tonielli" },
+        { name: "Ruthy Tonielli Bühring Lucas" },
         { name: "Julia Maykelli" },
         { name: "Helloá Antônia" }
       ]
