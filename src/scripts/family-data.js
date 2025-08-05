@@ -171,6 +171,7 @@ const persons = {
   // Dead
   "Marlene Bühring": {
     photo: "1uFJ7BSMW8o9e3ByJjj0rAgVTet6yJOyQ",
+    spouse: "",
     profession: ["Agricultora"],
     children: [
       "Marli Bühring Chagas",
@@ -808,7 +809,7 @@ const treeBuhring = {
     },
     {
       name: "Marlene Bühring",
-      spouse: "",
+      spouse: "Antinio Jairo de borba Chagas",
       children: [
         { name: "Marieli Adrinani Bühring Chagas",
         spouse: "Anderson Junior Guaresma",
