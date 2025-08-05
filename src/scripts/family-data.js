@@ -139,7 +139,7 @@ const persons = {
   // Aproved
   "Augusto Schultz": {
     born: "25/03/1965",
-    hometown: "Capanema - Paraná",
+    hometown: "Capanema - PR/BR: 25°40'18.8\"S 53°48'28.4\"W",
     religion: "Evangelico",
     education: "4° Série",
     photo: "18AoJArWSuqs2NT2ZpXLL8bg9PDDXD8AO",
@@ -152,7 +152,6 @@ const persons = {
   // Aproved
   "Marli Bühring": {
     born: "30/06/1974",
-    hometown: "Capanema - Paraná",
     religion: "Luterana - IECLB",
     nicknames: ["Polaca"],
     education: "4° Série",
@@ -255,6 +254,9 @@ const persons = {
   },
   // Dead
   "Leonilda Bühring": {
+    born: "02/06/1949",
+    hometown: "Palmeira das Missões - RS/BR: 27°53'59.6\"S 53°18'41.4\"W",
+    homes: ["São Cristovão Capanema: 25°39'19.8\"S 53°48'42.4\"W", "Cascavel: 24°57'15.2\"S 53°28'48.8\"W"],
     photo:"1QYvCI0gD_gOj2j0yPBtjY9TQ2EsarPeM",
     profession: ["Agricultora"],
     singleName: "Leonilda Müller",
@@ -268,12 +270,17 @@ const persons = {
       "Altair Bühring",
       "Adelir Bühring",
       "Arno Bühring",
-    
     ],
+    fathers:[
+      "Henrique Muller",
+      "Olivia Schneider Muller"
+    ],
+
   },
   // Dead
   "Plinio Brixner Bühring": {
     photo: "16DlUSq_CfV5-A6i2ErF-WN5DADt99teA",
+    homes: ["São Cristovão Capanema: 25°39'19.8\"S 53°48'42.4\"W", "Cascavel: 24°57'15.2\"S 53°28'48.8\"W"],
     profession: ["Agricultor"],
     spouse: "Leonilda Bühring",
     children: [
