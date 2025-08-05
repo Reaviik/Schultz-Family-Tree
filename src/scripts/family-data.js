@@ -170,6 +170,7 @@ const persons = {
   },
   // Dead
   "Marlene Bühring": {
+    photo: "1uFJ7BSMW8o9e3ByJjj0rAgVTet6yJOyQ",
     profession: ["Agricultora"],
     children: [
       "Marli Bühring Chagas",
@@ -253,6 +254,7 @@ const persons = {
   },
   // Dead
   "Leonilda Bühring": {
+    photo:"1QYvCI0gD_gOj2j0yPBtjY9TQ2EsarPeM",
     profession: ["Agricultora"],
     singleName: "Leonilda Müller",
     spouse: "Plinio Brixner Bühring",
@@ -270,6 +272,7 @@ const persons = {
   },
   // Dead
   "Plinio Brixner Bühring": {
+    photo: "16DlUSq_CfV5-A6i2ErF-WN5DADt99teA",
     profession: ["Agricultor"],
     spouse: "Leonilda Bühring",
     children: [
@@ -446,6 +449,10 @@ const persons = {
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
+  },
+  // Alive
+  "Marcos Adriano Bühring Chagas":{
+    photo:"1L-5pPZlztoKIAsycuA_7UoKdKDir5qE1",
   },
   // Alive
   "Marieli Adrinani Bühring Chagas": {
@@ -790,7 +797,7 @@ const treeKoch = {
 // Estrutura alternativa mostrando os pais de Marli como ramificação principal
 const treeBuhring = {
   name: "Plinio Brixner Bühring",
-  spouse: "Leinilda Bühring",
+  spouse: "Leonilda Bühring",
   children: [
     {
       name: "Marli Bühring",
