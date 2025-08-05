@@ -450,6 +450,7 @@ const persons = {
   // Alive
   "Marieli Adrinani Bühring Chagas": {
     born: "02/02/2000",
+    photo:"1X0oEi8odkgxmfqkXZii4bMtR1ajBQJId",
     hometown: "Panambi - RS/BR",
     profession: ["Mecanica", "Eletricista", "(Dona de Casa)"],
     religion: "Luterana - IECLB",
@@ -470,7 +471,9 @@ const persons = {
   },
   // Alive
   "Anderson Junior Guaresma": {
+    born: "04/11/1994",
     conjuge: "Marieli Adrinani Bühring Chagas",
+    photo:"187y9aOTBIXONUMXNhP7Maui1i_MpO4Vh",
     children: [
       "Isabela Victoria Bühring Guaresma",
     ],
@@ -478,6 +481,7 @@ const persons = {
   // Alive
   "Isabela Victoria Bühring Guaresma": {
     born: "04/05/2018",
+    photo:"1QU0MK8vWXcuHqhFjn_OsWYZnT6vQqhsX",
     fathers: [
       "Anderson Junior Guaresma",
       "Marieli Adrinani Bühring Chagas"
@@ -799,7 +803,13 @@ const treeBuhring = {
       name: "Marlene Bühring",
       spouse: "",
       children: [
-        { name: "Marieli Adrinani Bühring Chagas" },
+        { name: "Marieli Adrinani Bühring Chagas",
+        spouse: "Anderson Junior Guaresma",
+        children: [
+          { name: "Isabela Victoria Bühring Guaresma" }
+        ]
+
+        },
         { name: "Marcos Adriano Bühring Chagas" }
       ]
     },
