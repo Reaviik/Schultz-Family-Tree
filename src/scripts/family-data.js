@@ -156,7 +156,7 @@ const persons = {
     nicknames: ["Polaca"],
     education: "4° Série",
     phone: "46 9 9978-4542",
-    photo: "1gZIAdsPPPXf4lPshhy1kIjxG4XSRsg5z",
+    photo: "1pzq6rQXI0YR4rWz0bAW5Igd3KVYhBZtv",
     homes: ["Flor da Serra - Capanema - PR/BR: 25°36'39.8\"S 53°49'09.3\"W","Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
     children: ["David Herbert Schultz"],
     hometown: "Capanema - PR/BR: 25°40'18.8\"S 53°48'28.4\"W",
@@ -233,6 +233,22 @@ const persons = {
       "Noemi Bühring de Paula",
       "Toniel Lucas"
     ]
+  },
+  "Julia Maykelli":{
+    photo: "1ZWZpxPuXh-PatrbGfvNsuSRhds691VxS",
+    fathers: [
+      "Noemi Bühring de Paula",
+      "Boaventura de Paula Neto"
+    ]
+
+  },
+  "Helloá Antônia":{
+    photo: "1xrlf4smoT1G45zabNlC4Crl9QUERYlZi",
+    fathers: [
+      "Noemi Bühring de Paula",
+      "Boaventura de Paula Neto"
+    ]
+
   },
   // Alive
   "Altair Bühring": {
