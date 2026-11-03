@@ -3,6 +3,7 @@ const persons = {
   // Dead
   "Edmundo Schultz": {
     hometown: "Russia",
+    born: "16/03/1919",
     grave: "Irai - SC/BR: 27°11'22.0\"S 53°15'47.0\"W",
     religion: "Ex: Luterana - IECLB",
     homes: ["Russia: https://maps.app.goo.gl/xiLyjfyg2EmW4i689"],
@@ -22,31 +23,31 @@ const persons = {
     spouse: "Edmundo Schultz",
   },
   // Dead
-  "Wilhelmina Schultz":{
+  "Wilhelmina Schultz": {
     hometown: "Russia",
     born: "04/01/1925",
     spouse: "Eduardo Schultz",
-    profession:["Domestica"],
-    fathers:[
+    profession: ["Domestica"],
+    fathers: [
       "Guilherme Reicheste",
       "Maria Reicheste"
     ],
-    documents:["https://www.familysearch.org/ark:/61903/3:1:3QHV-P3JS-M9SD-S?view=index&personArk=%2Fark%3A%2F61903%2F1%3A1%3AX9YB-1718&action=view&cc=3741255&lang=pt&groupId="],
+    documents: ["https://www.familysearch.org/ark:/61903/3:1:3QHV-P3JS-M9SD-S?view=index&personArk=%2Fark%3A%2F61903%2F1%3A1%3AX9YB-1718&action=view&cc=3741255&lang=pt&groupId="],
     events: ["Casamento com Eduardo Schultz em 31/06/1948"],
     homes: ["Irai - Santa Catarina"],
     singleName: "Wilhelmina Reicheste"
   },
   // ?
-  "Eduardo Schultz":{
+  "Eduardo Schultz": {
     hometown: "Russia",
     born: "02/01/1916",
-    profession:["Agricultor"],
+    profession: ["Agricultor"],
     spouse: "Wilhelmina Reicheste",
-    fathers:[
+    fathers: [
       "Edmundo Schultz",
       "Wilhelmina Schultz"
     ],
-    documents:["https://www.familysearch.org/ark:/61903/3:1:3QHV-P3JS-M9SD-S?view=index&personArk=%2Fark%3A%2F61903%2F1%3A1%3AX9YB-1718&action=view&cc=3741255&lang=pt&groupId="],
+    documents: ["https://www.familysearch.org/ark:/61903/3:1:3QHV-P3JS-M9SD-S?view=index&personArk=%2Fark%3A%2F61903%2F1%3A1%3AX9YB-1718&action=view&cc=3741255&lang=pt&groupId="],
     events: ["Casamento com Wilhelmina Reicheste em 31/06/1948"],
     homes: ["Irai - Santa Catarina"],
   },
@@ -60,7 +61,7 @@ const persons = {
     ],
     homes: ["Irai - Santa Catarina"],
     spouse: "Lilie Reinhard Schultz",
-    fathers:[
+    fathers: [
       "Edmundo Schultz",
       "Guilhermina Schultz"
     ],
@@ -75,7 +76,7 @@ const persons = {
     documents: ["https://www.familysearch.org/ark:/61903/3:1:3QHV-L3JS-M9MV-Y?view=index&personArk=%2Fark%3A%2F61903%2F1%3A1%3AX9Y1-KX2W&action=view&cc=3741255&lang=pt&groupId="],
     singleName: "Lidie Reinhard Kock",
     events: ["Casou-se com Daniel Schultz em 27/07/1942"],
-    fathers:[
+    fathers: [
       "Francisco Köck",
       "Lucinda Köck"
     ],
@@ -98,24 +99,24 @@ const persons = {
     spouse: "Josefina Lidia Schultz",
     events: ["Casou-se com Josefina Lidia köch em 27/03/1948"],
     documents: ["https://www.familysearch.org/ark:/61903/3:1:3QHV-P3JS-M9SC-6?view=index&personArk=%2Fark%3A%2F61903%2F1%3A1%3AX9Y1-KL34&action=view&cc=3741255&lang=pt&groupId="],
-    fathers:[
+    fathers: [
       "Augusto Köch",
       "Terreza Köck"
     ],
   },
-  "Augusto Köch":{
+  "Augusto Köch": {
     children: [
       "Josefina Lidia Schultz",
     ],
   },
-  "Terreza Köck":{
+  "Terreza Köck": {
     children: [
       "Josefina Lidia Schultz",
     ],
   },
   // Dead
   "Josefina Lidia Schultz": {
-    born: "01/01/1955",
+    born: "08/10/1929",
     hometown: "Santa Catarina",
     profession: ["Agricultora"],
     events: ["Casou-se com Herbert Schultz em 27/03/1948"],
@@ -157,7 +158,7 @@ const persons = {
     education: "4° Série",
     phone: "46 9 9978-4542",
     photo: "1pzq6rQXI0YR4rWz0bAW5Igd3KVYhBZtv",
-    homes: ["Flor da Serra - Capanema - PR/BR: 25°36'39.8\"S 53°49'09.3\"W","Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
+    homes: ["Flor da Serra - Capanema - PR/BR: 25°36'39.8\"S 53°49'09.3\"W", "Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
     children: ["David Herbert Schultz"],
     hometown: "Capanema - PR/BR: 25°40'18.8\"S 53°48'28.4\"W",
     profession: ["Agricultora"],
@@ -218,7 +219,7 @@ const persons = {
     ],
   },
   // Alive
-  "Ruthy Tonielli Bühring Lucas":{
+  "Ruthy Tonielli Bühring Lucas": {
     born: "07/05/2005",
     hometown: "Capanema - PR/BR: 25°39'18.2\"S 53°48'38.5\"W",
     profession: ["Futura Biologa"],
@@ -234,7 +235,7 @@ const persons = {
       "Toniel Lucas"
     ]
   },
-  "Julia Maykelli":{
+  "Julia Maykelli": {
     photo: "1ZWZpxPuXh-PatrbGfvNsuSRhds691VxS",
     fathers: [
       "Noemi Bühring de Paula",
@@ -242,7 +243,7 @@ const persons = {
     ]
 
   },
-  "Helloá Antônia":{
+  "Helloá Antônia": {
     photo: "1xrlf4smoT1G45zabNlC4Crl9QUERYlZi",
     fathers: [
       "Noemi Bühring de Paula",
@@ -273,7 +274,7 @@ const persons = {
     born: "02/06/1949",
     hometown: "Palmeira das Missões - RS/BR: 27°53'59.6\"S 53°18'41.4\"W",
     homes: ["São Cristovão Capanema: 25°39'19.8\"S 53°48'42.4\"W", "Cascavel: 24°57'15.2\"S 53°28'48.8\"W"],
-    photo:"1QYvCI0gD_gOj2j0yPBtjY9TQ2EsarPeM",
+    photo: "1QYvCI0gD_gOj2j0yPBtjY9TQ2EsarPeM",
     profession: ["Agricultora"],
     singleName: "Leonilda Müller",
     spouse: "Plinio Brixner Bühring",
@@ -287,7 +288,7 @@ const persons = {
       "Adelir Bühring",
       "Arno Bühring",
     ],
-    fathers:[
+    fathers: [
       "Henrique Muller",
       "Olivia Schneider Muller"
     ],
@@ -322,7 +323,7 @@ const persons = {
     education: "3º Completo",
     homes: ["Flor da Serra - Capanema - PR/BR: 25°36'22.7\"S 53°48'52.2\"W", "Cozinhador Natingui - Ortigueira - PR/BR: 23°56'07.7\"S 50°57'42.5\"W", "Flor da Serra - Capanema - PR/BR: 25°36'44.0\"S 53°49'14.9\"W"],
     photo: "1Xh6Z3n8uHLjFe2oWuokTs5xYhfYOTi_f",
-    fathers:[
+    fathers: [
       "Marli Bühring",
       "Augusto Schultz"
     ],
@@ -331,18 +332,18 @@ const persons = {
   "Maria de Lurdes Correia": {
     singleName: "Maria de Lurdes",
     homes: ["São Cristovão - Capanema PR/BR: 25°39'20.4\"S 53°48'38.4\"W"],
-    fathers:[
+    fathers: [
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
     spouse: "Ivo Correia",
-    children: ["Carlos Correia", "Joarez", "Paulo Eder Correia", "Cezar", ]
+    children: ["Carlos Correia", "Joarez", "Paulo Eder Correia", "Cezar",]
   },
   // Dead
   "Ivo Correia": {
   },
   // Alive
-  "Paulo Eder Correia":{
+  "Paulo Eder Correia": {
     born: "10/10/1983",
     conjuge: "Suzana Terezinha Brito",
     hometown: "Foz do Iguaçu: 25°30'59.6\"S 54°35'07.0\"W",
@@ -358,13 +359,13 @@ const persons = {
       "Weslei Gabriel Correia",
       "Ravi Correia"
     ],
-    fathers:[
+    fathers: [
       "Maria de Lurdes Correia",
       "Ivo Correia"
     ],
   },
   // Alive
-  "Suzana Terezinha Brito":{
+  "Suzana Terezinha Brito": {
     born: "14/08/1984",
     conjuge: "Paulo Eder Correia",
     hometown: "Capanema - PR/BR: 25°40'18.8\"S 53°48'28.4\"W",
@@ -382,20 +383,20 @@ const persons = {
       "Weslei Gabriel Correia",
       "Ravi Correia"
     ],
-    fathers:[
+    fathers: [
       "Clarita B.G. Brito",
       "Adão Ataeibio Correia"
     ],
   },
-  "Weslei Gabriel Correia":{
-    fathers:[
+  "Weslei Gabriel Correia": {
+    fathers: [
       "Paulo Eder Correia",
       "Suzana Terezinha Brito"
     ],
   },
   // Alive
-  "Ravi Correia":{
-    fathers:[
+  "Ravi Correia": {
+    fathers: [
       "Paulo Eder Correia",
       "Suzana Terezinha Brito"
     ],
@@ -413,13 +414,13 @@ const persons = {
     height: "1.80",
     phone: "46 999744959",
     homes: ["São Cristovão - Capanema PR/BR: 25°39'20.3\"S 53°48'38.8\"W"],
-    fathers:[
+    fathers: [
       "Maria de Lurdes Correia",
       "Ivo Correia"
     ],
   },
   // Alive
-  "Juliane Camargo":{
+  "Juliane Camargo": {
     conjuge: "Carlos Correia",
   },
   // Alive
@@ -434,18 +435,18 @@ const persons = {
     phone: "46 999222199",
     email: "correiamaria499@gmail.com",
     homes: ["São Cristovão Capanema: 25°39'20.2\"S 53°48'39.3\"W"],
-    fathers:[
+    fathers: [
       "Maria de Lurdes Correia",
       "Ivo Correia"
     ],
-    children:[
+    children: [
       "Vitória Arieli Correia Lemos",
       "Deivid Riquelme Correia Lemos"
     ]
   },
   // Alive
   "Loreni Schultz": {
-    fathers:[
+    fathers: [
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
@@ -453,14 +454,14 @@ const persons = {
   // Alive
   "Ingridi Schultz": {
     photo: "1vC5mZAiyBSlgsPL6MDRy7UqLC6NSdkYL",
-    fathers:[
+    fathers: [
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
   },
   // Alive
   "Marcio Leandro Schultz": {
-    fathers:[
+    fathers: [
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
@@ -469,19 +470,19 @@ const persons = {
   "Erni Herbert Schultz": {
     born: "01/01/1968",
     death: "18/01/1989",
-    fathers:[
+    fathers: [
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
   },
   // Alive
-  "Marcos Adriano Bühring Chagas":{
-    photo:"1L-5pPZlztoKIAsycuA_7UoKdKDir5qE1",
+  "Marcos Adriano Bühring Chagas": {
+    photo: "1L-5pPZlztoKIAsycuA_7UoKdKDir5qE1",
   },
   // Alive
   "Marieli Adrinani Bühring Chagas": {
     born: "02/02/2000",
-    photo:"1X0oEi8odkgxmfqkXZii4bMtR1ajBQJId",
+    photo: "1X0oEi8odkgxmfqkXZii4bMtR1ajBQJId",
     hometown: "Panambi - RS/BR",
     profession: ["Mecanica", "Eletricista", "(Dona de Casa)"],
     religion: "Luterana - IECLB",
@@ -504,7 +505,7 @@ const persons = {
   "Anderson Junior Guaresma": {
     born: "04/11/1994",
     conjuge: "Marieli Adrinani Bühring Chagas",
-    photo:"187y9aOTBIXONUMXNhP7Maui1i_MpO4Vh",
+    photo: "187y9aOTBIXONUMXNhP7Maui1i_MpO4Vh",
     children: [
       "Isabela Victoria Bühring Guaresma",
     ],
@@ -512,7 +513,7 @@ const persons = {
   // Alive
   "Isabela Victoria Bühring Guaresma": {
     born: "04/05/2018",
-    photo:"1QU0MK8vWXcuHqhFjn_OsWYZnT6vQqhsX",
+    photo: "1QU0MK8vWXcuHqhFjn_OsWYZnT6vQqhsX",
     fathers: [
       "Anderson Junior Guaresma",
       "Marieli Adrinani Bühring Chagas"
@@ -531,8 +532,8 @@ const persons = {
   "Veranice Fagundes": {
     born: "01/01/1958",
     singleName: "Veranice Schultz",
-    homes: ["Canela: 29°21'49.6\"S 50°48'40.4\"W","Capanema: 25°40'18.9\"S 53°48'28.1\"W"],
-    fathers:[
+    homes: ["Canela: 29°21'49.6\"S 50°48'40.4\"W", "Capanema: 25°40'18.9\"S 53°48'28.1\"W"],
+    fathers: [
       "Josefina Lidia Schultz",
       "Herbert Schultz"
     ],
@@ -583,7 +584,7 @@ const persons = {
     height: "1.65",
     phone: "46 999187059",
     homes: ["São Cristovão Capanema PR/BR: 25°40'18.9\"S 53°48'28.1\"W"],
-    children:[
+    children: [
       "Livia Lais de Freitas",
       "Melissa Rafaela de Freitas"
     ],
@@ -593,22 +594,22 @@ const persons = {
     ],
   },
   // Alive
-  "Argu Rodrigo de Freitas":{
-    children:[
+  "Argu Rodrigo de Freitas": {
+    children: [
       "Livia Lais de Freitas",
       "Melissa Rafaela de Freitas"
     ],
   },
   // Alive
-  "Livia Lais de Freitas":{
-    fathers:[
+  "Livia Lais de Freitas": {
+    fathers: [
       "Elizandra Fagundes",
       "Argu Rodrigo de Freitas"
     ]
   },
   // Alive
-  "Melissa Rafaela de Freitas":{
-    fathers:[
+  "Melissa Rafaela de Freitas": {
+    fathers: [
       "Elizandra Fagundes",
       "Argu Rodrigo de Freitas"
     ]
@@ -658,39 +659,43 @@ const tree = {
           name: "Maria de Lurdes Correia",
           spouse: "Ivo Correia",
           children: [
-            { name: "Maria Daloé Correia",
+            {
+              name: "Maria Daloé Correia",
               children: [
                 { name: "Vitória Arieli Correia Lemos" },
                 { name: "Deivid Riquelme Correia Lemos" }
               ]
-             },
-            { name: "Paulo Eder Correia",
+            },
+            {
+              name: "Paulo Eder Correia",
               spouse: "Suzana Terezinha Brito",
               children: [
                 { name: "Weslei Gabriel Correia" },
                 { name: "Ravi Correia" }
               ]
             },
-            { name: "Carlos Correia",
+            {
+              name: "Carlos Correia",
               conjuge: "Juliane Camargo",
-             },
+            },
             { name: "Cezar Correia" },
             { name: "Joarez Correia" }
           ]
         },
-        { 
+        {
           name: "Veranice Schultz",
           spouse: "Jé Fagundes",
           children: [
             { name: "Eliziane Fagundes" },
             { name: "Sarassandra Fagundes" },
-            { name: "Elizandra Fagundes",
+            {
+              name: "Elizandra Fagundes",
               spouse: "Argu Rodrigo de Freitas",
               children: [
                 { name: "Livia Lais de Freitas" },
                 { name: "Melissa Rafaela de Freitas" }
               ]
-             },
+            },
             { name: "Jonas Fagundes" },
           ]
         },
@@ -732,43 +737,48 @@ const treeSchultz = {
           name: "Maria de Lurdes Correia",
           spouse: "Ivo Correia",
           children: [
-            { name: "Maria Daloé Correia",
+            {
+              name: "Maria Daloé Correia",
               children: [
                 { name: "Vitória Arieli Correia Lemos" },
                 { name: "Deivid Riquelme Correia Lemos" }
               ]
-             },
-            { name: "Paulo Eder Correia",
+            },
+            {
+              name: "Paulo Eder Correia",
               spouse: "Suzana Terezinha Brito",
               children: [
                 { name: "Weslei Gabriel Correia" },
                 { name: "Ravi Correia" }
               ]
             },
-            { name: "Carlos Correia",
+            {
+              name: "Carlos Correia",
               conjuge: "Juliane Camargo",
-             },
+            },
             { name: "Cezar Correia" },
             { name: "Joarez Correia" }
           ]
         },
-        { 
+        {
           name: "Veranice Schultz",
           spouse: "Jé Fagundes",
           children: [
             { name: "Eliziane Fagundes" },
             { name: "Sarassandra Fagundes" },
-            { name: "Elizandra Fagundes",
+            {
+              name: "Elizandra Fagundes",
               spouse: "Argu Rodrigo de Freitas",
               children: [
                 { name: "Livia Lais de Freitas" },
                 { name: "Melissa Rafaela de Freitas" }
               ]
-             },
+            },
             { name: "Jonas Fagundes" },
           ]
         },
-        { name: "Loreni Schultz",
+        {
+          name: "Loreni Schultz",
           spouse: "Oscar",
           children: [
             { name: "Fábia" },
@@ -776,8 +786,8 @@ const treeSchultz = {
           ]
         },
         { name: "Ingridi Schultz" },
-        { name: "Marcio Leandro Schultz"},
-        { name: "Erni Herbert Schultz"}
+        { name: "Marcio Leandro Schultz" },
+        { name: "Erni Herbert Schultz" }
       ]
     }
   ]
@@ -834,11 +844,12 @@ const treeBuhring = {
       name: "Marlene Bühring",
       spouse: "Antinio Jairo de borba Chagas",
       children: [
-        { name: "Marieli Adrinani Bühring Chagas",
-        spouse: "Anderson Junior Guaresma",
-        children: [
-          { name: "Isabela Victoria Bühring Guaresma" }
-        ]
+        {
+          name: "Marieli Adrinani Bühring Chagas",
+          spouse: "Anderson Junior Guaresma",
+          children: [
+            { name: "Isabela Victoria Bühring Guaresma" }
+          ]
 
         },
         { name: "Marcos Adriano Bühring Chagas" }
